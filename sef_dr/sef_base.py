@@ -53,7 +53,7 @@ class SEF_Base(object):
         # Project the scaled data
         return self.project_fn(data)
 
-    def fit(self, data, iters, batch_size=0, verbose=False, target='copy', target_data=None, target_labels=None,
+    def fit(self, data, iters, batch_size=128, verbose=False, target='copy', target_data=None, target_labels=None,
             target_sigma=None, target_params={}):
         """
         Optimizes the similarity embedding

@@ -51,14 +51,14 @@ def unsupervised_approximation(method='pca'):
 
 
 if __name__ == '__main__':
-    # print "Evaluating baseline SVM ..."
-    # unsupervised_approximation('svm')
-    #
-    # print "Evaluating baseline NCC"
-    # unsupervised_approximation('ncc')
-    #
-    # print "Evaluating SVM-based analysis 10d"
-    # unsupervised_approximation('S-SVM-A-10d')
+    print "Evaluating baseline SVM ..."
+    unsupervised_approximation('svm')
+
+    print "Evaluating baseline NCC"
+    unsupervised_approximation('ncc')
+
+    print "Evaluating SVM-based analysis 10d"
+    unsupervised_approximation('S-SVM-A-10d')
 
     print "Evaluating SVM-based analysis 20d"
     unsupervised_approximation('S-SVM-A-20d')
