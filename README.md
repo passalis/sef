@@ -113,7 +113,6 @@ You can clone the repository and then install the package:
 git clone https://github.com/passalis/sef
 cd sef
 python setup.py install --user
-sudo python setup.py install
 </pre>
 
 ## Further reading
