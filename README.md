@@ -4,6 +4,17 @@ This package provides an implementation of the [Similarity Embedding Framework](
 ## What is the Similarity Embedding Framework?
 The vast majority of Dimensionality Reduction techniques rely on second-order statistics to define their optimization objective. Even though this provides adequate results in most cases, it comes with several shortcomings. The methods require carefully designed regularizers and they are usually prone to outliers. The Similarity Embedding Framework can overcome the aforementioned limitations and provides a conceptually simpler way to express optimization targets similar to existing DR techniques. Deriving a new DR technique using the Similarity Embedding Framework becomes simply a matter of choosing an appropriate target similarity matrix. A variety of classical tasks, such as performing supervised dimensionality reduction and providing out-of-of-sample extensions, as well as, new novel techniques, such as providing fast linear embeddings for complex techniques, are demonstrated in this paper using the proposed framework. 
 
+## How to use PySEF?
+Simply import **sef_dr**, create a SEF object, fit it and transform your data!
+
+```python
+import sef_dr
+proj = sef_dr.LinearSEF(input_dimensionality=784, output_dimensionality=9)
+proj.init(data)
+proj.fit(data=data, target_labels=data, target='supervised', iters=10)
+transformed_data = proj.transform(data)
+```
+
 ## What PySEF can do?
 
 ### 1. Recreate the geometry of a high dimensional space into a space with less dimensions!
@@ -16,7 +27,7 @@ In [examples/unsupervised_approximation.py](examples/unsupervised_approximation.
 | Linear SEF mimics PCA-20d | **84.59%** | 
 
 ### 2. Re-derive similarity-based versions of well-known techniques!
-In [examples/supervised_reduction.py.py](examples/supervised_reduction.py) we derive a similarity-based LDA:
+In [examples/supervised_reduction.py](examples/supervised_reduction.py) we derive a similarity-based LDA:
 
 
 | Method     | Accuracy |
@@ -108,6 +119,9 @@ Close enough! The samples of the same class have been arranged in circles, while
 
 (The MNIST dataset was used for all the conducted experiments)
 
+## Are there tutorials?
+
+Yes! Check out the notebooks in the [tutorials](tutorials) folder!
 
 ## How to install PySEF?
 
