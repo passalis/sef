@@ -2,10 +2,9 @@ import numpy as np
 import theano
 import theano.tensor as T
 from sklearn.decomposition import PCA
-from sef_dr.utils.learning import adam
 from sef_base import SEF_Base
-from sef_dr.utils.similarity import mean_data_distance
-
+from sef_dr.similarity import mean_data_distance
+from lasagne.updates import adam
 
 class LinearSEF(SEF_Base):
     def __init__(self, input_dimensionality, output_dimensionality, learning_rate=0.001, regularizer_weight=0,

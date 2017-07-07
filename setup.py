@@ -6,7 +6,7 @@ setup(
     version=__version__,
     author='N. Passalis',
     author_email='passalis@csd.auth.gr',
-    packages=['sef_dr', 'sef_dr/utils'],
+    packages=['sef_dr',],
     url='https://github.com/passalis/sef_dr',
     license='LICENSE.txt',
     description='Package that implements the Similatiry Embedding Framework on top of the theano.',

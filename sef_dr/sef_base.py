@@ -4,7 +4,7 @@ import theano
 import theano.tensor as T
 from sklearn.preprocessing import StandardScaler
 from targets import sim_target_copy, sim_target_supervised, sim_target_svm
-from sef_dr.utils.similarity import mean_data_distance, sym_similarity_matrix
+from sef_dr.similarity import mean_data_distance, sym_similarity_matrix
 
 
 class SEF_Base(object):

@@ -1,6 +1,5 @@
 import numpy as np
-from sef_dr.utils.similarity import fast_similarity_matrix_fn
-from sklearn.preprocessing import LabelEncoder
+from sef_dr.similarity import fast_similarity_matrix_fn
 
 
 def sim_target_copy(target_data, target_labels, sigma, idx, target_params):

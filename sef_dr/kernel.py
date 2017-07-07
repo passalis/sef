@@ -2,9 +2,9 @@ import numpy as np
 import theano
 import theano.tensor as T
 from sklearn.decomposition import KernelPCA
-from sef_dr.utils.similarity import sym_distance_matrix
-from sef_dr.utils.learning import adam
-from sef_dr.utils.similarity import mean_data_distance
+from sef_dr.similarity import sym_distance_matrix
+from lasagne.updates import adam
+from sef_dr.similarity import mean_data_distance
 from sef_base import SEF_Base
 
 
