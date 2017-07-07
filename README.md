@@ -94,10 +94,11 @@ Note that we also appropriately set the weighting mask to account for the imbala
 
 ## How to install SEF?
 
+TODO!
 
 ## Further reading
 
-You can find more details about SEF in our [https://arxiv.org/abs/1706.05692](paper).
+You can find more details about SEF in our [paper](https://arxiv.org/abs/1706.05692).
 
 If you use SEF in your research, please cite the following paper:
 
