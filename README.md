@@ -134,7 +134,7 @@ python setup.py install --user
 
 ## Further reading
 
-You can find more details about SEF in our [paper](https://arxiv.org/abs/1706.05692).
+You can find more details about the SEF in our [paper](https://arxiv.org/abs/1706.05692).
 
 If you use SEF in your research, please cite the following paper:
 
