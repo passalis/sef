@@ -6,7 +6,7 @@ The vast majority of Dimensionality Reduction techniques rely on second-order st
 
 ## What SEF can do?
 
-### 1. Recreate the geometry of a high dimensional space into a space with less dimensions 
+### 1. Recreate the geometry of a high dimensional space into a space with less dimensions!
 
 In [examples/unsupervised_approximation.py](unsupervised_approximation.py) we recreate the 20-d PCA using just 10 dimensions:
 
@@ -15,6 +15,17 @@ In [examples/unsupervised_approximation.py](unsupervised_approximation.py) we re
 | PCA 10-d  |  82.88%  | 
 | SEF mimics PCA-20d | 84.59% | 
 
+### 2. Re-derive similarity-based versions of well-known techniques!
+In [examples/supervised_reduction.py.py](supervised_reduction.py.py) we derive a similarity-based LDA:
+
+
+| Method     | Accuracy |
+| --------|---------|
+| LDA 9-d  |  85.67%  | 
+| S-LDA 9d | 88.24% | 
+| S-LDA 18d | 88.64% | 
+
+Note that LDA is limited to 9-d projections for classifications problems with 10 classes.
 
 ## How to install SEF?
 
