@@ -52,7 +52,7 @@ In [examples/svm_approximation.py](examples/svm_approximation.py) an SVM-based a
 | NCC - Linear SEF 10d | 85.50 % | 
 | NCC - Linear SEF 10d  | **86.41%** | 
 
-### 5. Define your custom similarity target function!
+### 5. Deriving a new DR method becomes simply a matter of defining a custom similarity target!
 
 The SEF allows for easily deriving novel DR techniques by simply defining the target similarity matrix. For the current implementation this can be done by defining a function that follows this pattern:
 
@@ -95,4 +95,18 @@ Note that we also appropriately set the weighting mask to account for the imbala
 ## How to install SEF?
 
 
+## Further reading
+
+You can find more details about SEF in our [https://arxiv.org/abs/1706.05692](paper).
+
+If you use SEF in your research, please cite the following paper:
+
+<pre>
+@article{passalis2017dimensionality,
+  title={Dimensionality Reduction using Similarity-induced Embeddings},
+  author={Passalis, Nikolaos and Tefas, Anastasios},
+  journal={arXiv preprint arXiv:1706.05692},
+  year={2017}
+}
+</pre>
 
