@@ -2,7 +2,7 @@ from setuptools import setup
 from sef_dr.version import __version__
 
 setup(
-    name='Similarity Embedding Framework',
+    name='PySEF',
     version=__version__,
     author='N. Passalis',
     author_email='passalis@csd.auth.gr',
