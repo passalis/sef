@@ -1,4 +1,4 @@
-# Similarity Embedding Framework
+# PySEF: A Python Library for Similarity-based Dimensionality Reduction
 This package provides an implementation of the [Similarity Embedding Framework](https://arxiv.org/abs/1706.05692) (SEF) on top of the *theano* library. The implementation exposes a *scikit-learn*-like interface.
 
 ## What is the Similarity Embedding Framework?
