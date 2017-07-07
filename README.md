@@ -43,8 +43,18 @@ In [examples/linear_outofsample.py](linear_outofsample.py) and [examples/kernel_
 | Kernel SEF 10d | 86.84 % | 
 | Kernel SEF 20d | **90.43%** | 
 
+### 4. Perform SVM-based analysis!
+In [examples/svm_approximation.py](svm_approximation.py) an SVM-based analysis technique that mimics the similarity induced by the hyperplanes of the 1-vs-1 SVMs is used to perform DR. This method allows for using a light-weight classifier, such as the NCC, to perform fast classification.
+
+| Method     | Accuracy |
+| --------|---------|
+| NCC - Original |  80.84%  | 
+| NCC - Linear SEF 10d | 85.50 % | 
+| NCC - Linear SEF 10d  | **86.41%** | 
 
 (The MNIST dataset was used for all the conducted experiments)
+
+
 ## How to define custom target functions?
 
 ## How to install SEF?
