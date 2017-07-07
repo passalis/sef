@@ -119,7 +119,7 @@ Close enough! The samples of the same class have been arranged in circles, while
 
 (The MNIST dataset was used for all the conducted experiments)
 
-## Are there tutorials?
+## Are there any tutorials?
 
 Yes! Check out the notebooks in the [tutorials](tutorials) folder!
 
