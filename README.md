@@ -28,7 +28,7 @@ In [examples/supervised_reduction.py.py](examples/supervised_reduction.py) we de
 Note that LDA is limited to 9-d projections for classifications problems with 10 classes.
 
 ### 3. Provide out-of-sample extensions!
-In [examples/linear_outofsample.py](examples/linear_outofsample.py) and [examples/kernel_outofsample.py](examples/kernel_outofsample.py) we use the SEF to provide out-of-sample extenstions for the ISOMAP technique. Note that the SEF, unlike the regression-based method, is not limited by the number of dimensions of the original technique.
+In [examples/linear_outofsample.py](examples/linear_outofsample.py) and [examples/kernel_outofsample.py](examples/kernel_outofsample.py) we use the SEF to provide out-of-sample extensions for the ISOMAP technique. Note that the SEF, unlike the regression-based method, is not limited by the number of dimensions of the original technique.
 
 
 | Method     | Accuracy |
@@ -61,8 +61,7 @@ def my_custom_similarity_function(target_data, target_labels, sigma, idx, target
     pass
 ```
 
-The *target_data*, *target_labels*, *sigma*, and *target_params* are passed to the *.fit()* function. During the training this function is called with a different set of indices *idx* and it is expected to return the target similarity matrix for the data that corresponds to *idx*. For example, let's define a function that sets a target similarity of 0.8 for the points that belong to the same class, and 0 for the points that belong to different classes:
-
+The *target_data*, *target_labels*, *sigma*, and *target_params* are passed to the *.fit()* function. During the training this function is called with a different set of indices *idx* and it is expected to return the target similarity matrix for the data that corresponds to *idx*. For example, let's define a function that sets a target similarity of 0.8 for the points that belong to the same class, and 0.1 for the points that belong to different classes:
 
 ```python
 def sim_target_supervised(target_data, target_labels, sigma, idx, target_params):
@@ -80,13 +79,28 @@ def sim_target_supervised(target_data, target_labels, sigma, idx, target_params)
                 Gt[i, j] = 0.8
                 mask[i, j] = 1
             else:
-                Gt[i, j] = 0
-                mask[i, j] = 1.0 / (N_labels - 1)
+                Gt[i, j] = 0.1
+                mask[i, j] = 0.8 / (N_labels - 1)
 
     return np.float32(Gt), np.float32(mask)
 ```
 
 Note that we also appropriately set the weighting mask to account for the imbalance between the intra-class and inter-class samples. It is important to remember to work only with the current batch (using the *idx*) and not the whole training set (that is always passed to *target_data*/*target_labels*). You can find more target function examples in [sef_dr/targets.py](sef_dr/targets.py) 
+
+The target that we just defined tries to place samples of the same class close together (but not to collapse them into the same point), as well as to repel samples of different classes (but still maintain as small similarity between them). Of course this problem is ill-posed in the 2-D space (when more than 3 points per class are used), but let's see what happens!
+
+Let's overfit the projection:
+
+```python
+    proj = KernelSEF(train_data, train_data.shape[0], 2, sigma=1, learning_rate=0.001)
+    proj.fit(train_data, target_labels=train_labels, target=sim_target_supervised, iters=500, verbose=True)
+    train_data = proj.transform(train_data)
+```
+and visualize the results:
+
+![alt Visualization of samples!](/examples/custom_dr.png?raw=true)
+
+Close enough! The samples of the same class have been arranged in circles, while the circles of different classes are almost equidistant to each other!
 
 
 (The MNIST dataset was used for all the conducted experiments)
