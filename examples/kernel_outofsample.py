@@ -55,4 +55,3 @@ if __name__ == '__main__':
 
     print "Evaluating kernel SEF (20d) for providing out-of-sample extensions..."
     outofsample_extensions('cK-ISOMAP-20d')
-

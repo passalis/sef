@@ -27,7 +27,8 @@ def unsupervised_approximation(method='pca'):
         test_data = scaler.transform(test_data)
 
         parameters = {'kernel': ['linear'], 'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000]}
-        model = grid_search.GridSearchCV(svm.SVC(max_iter=10000, decision_function_shape='ovo'), parameters, n_jobs=-1, cv=3)
+        model = grid_search.GridSearchCV(svm.SVC(max_iter=10000, decision_function_shape='ovo'), parameters, n_jobs=-1,
+                                         cv=3)
         model.fit(train_data[:n_train], train_labels[:n_train])
 
         params = {'model': model, 'n_labels': np.unique(train_labels).shape[0], 'scaler': scaler}

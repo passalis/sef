@@ -35,7 +35,7 @@ def outofsample_extensions(method='linear-regression'):
         loss = proj.fit(data=train_data[:n_train_samples, :], target_data=train_data_isomap, target='copy',
                         iters=50, batch_size=128, verbose=True)
         acc = evaluate_svm(proj.transform(train_data[:n_train_samples, :]), train_labels[:n_train_samples],
-                       proj.transform(test_data), test_labels)
+                           proj.transform(test_data), test_labels)
 
     print "Method: ", method, " Test accuracy: ", 100 * acc, " %"
 

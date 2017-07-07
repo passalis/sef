@@ -15,7 +15,6 @@ def supervised_reduction(method=None):
     n_train = 5000
     n_classes = len(np.unique(train_labels))
 
-
     if method == 'lda':
         proj = LinearDiscriminantAnalysis(n_components=n_classes - 1)
         proj.fit(train_data[:n_train, :], train_labels[:n_train])

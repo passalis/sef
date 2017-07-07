@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from sef_dr import KernelSEF
 
-def sim_target_supervised(target_data, target_labels, sigma, idx, target_params):
 
+def sim_target_supervised(target_data, target_labels, sigma, idx, target_params):
     cur_labels = target_labels[idx]
     N = cur_labels.shape[0]
 
@@ -38,7 +38,7 @@ if __name__ == '__main__':
 
     # Perform DR
     proj = KernelSEF(train_data, train_data.shape[0], 2, sigma=1, learning_rate=0.001)
-    proj.fit(train_data,  target_labels=train_labels, target=sim_target_supervised, iters=500, verbose=True)
+    proj.fit(train_data, target_labels=train_labels, target=sim_target_supervised, iters=500, verbose=True)
     train_data = proj.transform(train_data)
 
     # Plot the results
@@ -50,6 +50,3 @@ if __name__ == '__main__':
 
     plt.savefig('custom_dr.png', bbox_inches='tight')
     plt.show()
-
-
-

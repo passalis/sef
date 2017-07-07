@@ -6,6 +6,7 @@ from sef_base import SEF_Base
 from sef_dr.similarity import mean_data_distance
 from lasagne.updates import adam
 
+
 class LinearSEF(SEF_Base):
     def __init__(self, input_dimensionality, output_dimensionality, learning_rate=0.001, regularizer_weight=0,
                  scaler=None):
