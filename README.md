@@ -108,7 +108,13 @@ Close enough! The samples of the same class have been arranged in circles, while
 
 ## How to install SEF?
 
-TODO!
+You can clone the repository and then install the package:
+<pre>
+git clone https://github.com/passalis/sef
+cd sef
+python setup.py install --user
+sudo python setup.py install
+</pre>
 
 ## Further reading
 
