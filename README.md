@@ -10,7 +10,6 @@ Simply import **sef_dr**, create a SEF object, fit it and transform your data!
 ```python
 import sef_dr
 proj = sef_dr.LinearSEF(input_dimensionality=784, output_dimensionality=9)
-proj.init(data)
 proj.fit(data=data, target_labels=data, target='supervised', iters=10)
 transformed_data = proj.transform(data)
 ```
@@ -24,7 +23,7 @@ In [examples/unsupervised_approximation.py](examples/unsupervised_approximation.
 | Method     | Accuracy |
 | -----------|----------|
 | PCA 10-d   |  82.88%  | 
-| Linear SEF mimics PCA-20d | **84.59%** | 
+| Linear SEF mimics PCA-20d | **84.68%** | 
 
 ### 2. Re-derive similarity-based versions of well-known techniques!
 In [examples/supervised_reduction.py](examples/supervised_reduction.py) we derive a similarity-based LDA:
@@ -32,9 +31,9 @@ In [examples/supervised_reduction.py](examples/supervised_reduction.py) we deriv
 
 | Method     | Accuracy |
 | -----------|---------|
-| LDA 9d     |  85.67%  | 
-| Linear SEF 9d  | 88.24% | 
-| Linear SEF 18d | **88.64%** | 
+| LDA 9d     |  85.66%  | 
+| Linear SEF 9d  | 88.19% | 
+| Linear SEF 18d | **88.45%** | 
 
 Note that LDA is limited to 9-d projections for classifications problems with 10 classes.
 
@@ -44,9 +43,9 @@ In [examples/linear_outofsample.py](examples/linear_outofsample.py) and [example
 
 | Method     | Accuracy |
 | --------|---------|
-| Linear Regression |  85.26%  | 
-| Linear SEF 10d | 85.99% | 
-| Linear SEF 20d |  **88.58%** | 
+| Linear Regression |  85.25%  | 
+| Linear SEF 10d | 85.94% | 
+| Linear SEF 20d |  **89.03%** | 
 
 | Method     | Accuracy |
 | --------|---------|
@@ -65,11 +64,15 @@ In [examples/svm_approximation.py](examples/svm_approximation.py) an SVM-based a
 
 ### 5. Deriving a new DR method becomes simply a matter of defining a custom similarity target!
 
-The SEF allows for easily deriving novel DR techniques by simply defining the target similarity matrix. For the current implementation this can be done by defining a function that adheres to the following pattern:
+The SEF allows for easily deriving novel DR techniques by simply defining the target similarity matrix. For the current implementation this can be done by defining a function that adheres to the following signature:
 
 ```python
-def my_custom_similarity_function(target_data, target_labels, sigma, idx, target_params):
-    pass
+def custom_similarity_function(target_data, target_labels, sigma, idx, 
+    target_params):
+    Gt = np.zeros((len(idx), len(idx)))
+    Gt_mask = np.zeros((len(idx), len(idx)))
+    # Calculate the similarity target here
+    return np.float32(Gt), np.float32(Gt_mask)
 ```
 
 The *target_data*, *target_labels*, *sigma*, and *target_params* are passed to the *.fit()* function. During the training this function is called with a different set of indices *idx* and it is expected to return the target similarity matrix for the data that corresponds indeces defined by *idx*. 
@@ -105,7 +108,7 @@ The target that we just defined tries to place the samples of the same class clo
 Let's overfit the projection:
 
 ```python
-    proj = KernelSEF(train_data, train_data.shape[0], 2, sigma=1, learning_rate=0.001)
+    proj = KernelSEF(train_data, train_data.shape[0], 2, sigma=1, learning_rate=0.0001, regularizer_weight=0)
     proj.fit(train_data, target_labels=train_labels, target=sim_target_supervised, iters=500, verbose=True)
     train_data = proj.transform(train_data)
 ```
