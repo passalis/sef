@@ -39,8 +39,6 @@ def unsupervised_approximation(method='pca'):
         else:
             dims = 20
         proj = LinearSEF(train_data.shape[1], output_dimensionality=dims, learning_rate=0.001, regularizer_weight=0.001)
-        proj.init(train_data[:n_train])
-
         loss = proj.fit(data=train_data[:n_train, :], target_data=train_data[:n_train, :],
                         target_labels=train_labels[:n_train], target='svm', target_params=params, iters=50,
                         batch_size=128, verbose=True)

@@ -10,7 +10,21 @@ from sef_base import SEF_Base
 
 class KernelSEF(SEF_Base):
     def __init__(self, data, input_dimensionality, output_dimensionality, learning_rate=0.0001, kernel_type='rbf',
-                 degree=2, sigma=0, kernel_scaling=1, c=1, regularizer_weight=0, scaler=None):
+                 degree=2, sigma=0, kernel_scaling=1, c=1, regularizer_weight=0.001, scaler=None):
+        """
+        Creates a Kernel SEF object
+        :param data: the data to be used by the kernel
+        :param input_dimensionality: dimensionality of the input space
+        :param output_dimensionality: dimensionality of the target space
+        :param learning_rate: learning rate to be used for the optimization 
+        :param kernel_type: supported kernel: 'rbf', 'poly', and 'linear'
+        :param degree: degree of the polynomial kernel
+        :param sigma: the sigma value for the RBF kernel
+        :param kernel_scaling: scaling parameter for the kernel
+        :param c: constant kernel param for linear and poly kernsl
+        :param regularizer_weight: weight of the regularizer
+        :param scaler: the sklearn-compatible scaler (or None) 
+        """
         # Call base constructor
         SEF_Base.__init__(self, input_dimensionality, output_dimensionality, learning_rate, scaler=scaler)
 
@@ -56,7 +70,7 @@ class KernelSEF(SEF_Base):
         self.train_fn = theano.function(inputs=[self.X, self.Gt, self.Gt_mask], outputs=loss, updates=updates)
         self.project_fn = theano.function(inputs=[self.X], outputs=self._sym_project_data(self.X))
 
-    def init(self, data):
+    def _initialize(self, data):
         """
         Initializes the kernel SEF model
         :param data: Data to be used for the initialization

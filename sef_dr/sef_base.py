@@ -3,14 +3,16 @@ import numpy as np
 import theano
 import theano.tensor as T
 from sklearn.preprocessing import StandardScaler
-from targets import sim_target_copy, sim_target_supervised, sim_target_svm
+from targets import sim_target_copy, sim_target_supervised, sim_target_svm, sim_target_fixed
 from sef_dr.similarity import mean_data_distance, sym_similarity_matrix
 
 
 class SEF_Base(object):
     def __init__(self, input_dimensionality, output_dimensionality, learning_rate, scaler=None):
         """
-        SEF_Base constructor
+        SEF_Base constuctor
+        :param input_dimensionality: dimensionality of the input space
+        :param output_dimensionality: dimensionality of the target space
         :param learning_rate: the learning rate used for the optimization 
         :param scaler: the scaler used to scale the data
         """
@@ -53,8 +55,28 @@ class SEF_Base(object):
         # Project the scaled data
         return self.project_fn(data)
 
+    def fit_transform(self, data, iters, batch_size=128, verbose=False, target='copy', target_data=None,
+                      target_labels=None,
+                      target_sigma=None, target_params={}, warm_start=False):
+        """
+        Optimizes the similarity embedding and returns the projected data
+        :param data: the data used for the optimization
+        :param iters: the number of iterations to be performed
+        :param target_data: the data used to calculate the target similarity matrix using the 'target' function
+        :param target_labels: the labels of the data (if available and used by the 'target' function)
+        :param target_sigma: the sigma to be used (if needed by the 'target function) - if not given auto-estimated -
+        :param target: the function used to calculate the target similarity matrix(either string or compatible function)
+        :param batch_size: the used batch size
+        :param verbose: if set to True, then outputs information regarding the optimization process 
+        :param warm_start: if set to True, does not initialize the embedding function
+        :return: 
+        """
+        self.fit(data, iters, batch_size, verbose, target, target_data, target_labels, target_sigma, target_params,
+                 warm_start)
+        return self.transform(data)
+
     def fit(self, data, iters, batch_size=128, verbose=False, target='copy', target_data=None, target_labels=None,
-            target_sigma=None, target_params={}):
+            target_sigma=None, target_params={}, warm_start=False):
         """
         Optimizes the similarity embedding
         :param data: the data used for the optimization
@@ -64,9 +86,13 @@ class SEF_Base(object):
         :param target_sigma: the sigma to be used (if needed by the 'target function) - if not given auto-estimated -
         :param target: the function used to calculate the target similarity matrix(either string or compatible function)
         :param batch_size: the used batch size
-        :param verbose: if sets to True, then outputs information regarding the optimization process 
+        :param verbose: if set to True, then outputs information regarding the optimization process 
+        :param warm_start: if set to True, does not initialize the embedding function
         :return: 
         """
+
+        if not warm_start:
+            self._initialize(data)
 
         # Keep track of the loss during the optimization
         loss = np.zeros((iters, 1))
@@ -84,6 +110,8 @@ class SEF_Base(object):
             target_fn = sim_target_supervised
         elif target == 'svm':
             target_fn = sim_target_svm
+        elif target == 'fixed':
+            target_fn = sim_target_fixed
         else:
             target_fn = target
 
@@ -98,7 +126,8 @@ class SEF_Base(object):
             cur_loss = 0
             for j in range(n_batches):
                 cur_idx = idx[j * batch_size:(j + 1) * batch_size]
-                cur_idx.sort()
+                # Support for h5py
+                cur_idx = list(sorted(cur_idx))
                 # All the target functions must follow the same call conventions to be able to easily swap between them
                 G_target, G_target_mask = target_fn(target_data, target_labels, target_sigma, cur_idx, target_params)
                 cur_loss += self.train_fn(data[cur_idx], G_target, G_target_mask)
@@ -123,7 +152,7 @@ class SEF_Base(object):
         """
         return X
 
-    def init(self, data):
+    def _initialize(self, data):
         """
         Placeholder for initializer
         :param data: the data used for initialized the model

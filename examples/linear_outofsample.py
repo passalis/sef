@@ -2,7 +2,6 @@ import numpy as np
 import sklearn
 from sklearn.linear_model import LinearRegression
 from sklearn.manifold import Isomap
-
 from classification import evaluate_svm
 from mnist import load_mnist
 from sef_dr.linear import LinearSEF
@@ -31,7 +30,6 @@ def outofsample_extensions(method='linear-regression'):
             proj = LinearSEF(train_data.shape[1], output_dimensionality=10, learning_rate=0.001)
         else:
             proj = LinearSEF(train_data.shape[1], output_dimensionality=20, learning_rate=0.001)
-        proj.init(train_data[:n_train_samples, :])
         loss = proj.fit(data=train_data[:n_train_samples, :], target_data=train_data_isomap, target='copy',
                         iters=50, batch_size=128, verbose=True)
         acc = evaluate_svm(proj.transform(train_data[:n_train_samples, :]), train_labels[:n_train_samples],

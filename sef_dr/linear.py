@@ -8,8 +8,16 @@ from lasagne.updates import adam
 
 
 class LinearSEF(SEF_Base):
-    def __init__(self, input_dimensionality, output_dimensionality, learning_rate=0.001, regularizer_weight=0,
+    def __init__(self, input_dimensionality, output_dimensionality, learning_rate=0.001, regularizer_weight=0.001,
                  scaler=None):
+        """
+        Creats a Linear SEF object
+        :param input_dimensionality: dimensionality of the input space
+        :param output_dimensionality: dimensionality of the target space
+        :param learning_rate: learning rate to be used for the optimization 
+        :param regularizer_weight: the weight of the regularizer
+        :param scaler: 
+        """
 
         # Call base constructor
         SEF_Base.__init__(self, input_dimensionality, output_dimensionality, learning_rate, scaler)
@@ -29,7 +37,7 @@ class LinearSEF(SEF_Base):
         self.train_fn = theano.function(inputs=[self.X, self.Gt, self.Gt_mask], outputs=loss, updates=updates)
         self.project_fn = theano.function(inputs=[self.X], outputs=self._sym_project_data(self.X))
 
-    def init(self, data):
+    def _initialize(self, data):
         """
         Initializes the linear SEF model
         :param data: 

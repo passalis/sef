@@ -1,7 +1,6 @@
 import numpy as np
 import sklearn
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-
 from classification import evaluate_svm
 from mnist import load_mnist
 from sef_dr.linear import LinearSEF
@@ -20,15 +19,12 @@ def supervised_reduction(method=None):
         proj.fit(train_data[:n_train, :], train_labels[:n_train])
     elif method == 's-lda':
         proj = LinearSEF(train_data.shape[1], output_dimensionality=(n_classes - 1), regularizer_weight=0.001)
-        proj.init(train_data[:n_train, :])
         loss = proj.fit(data=train_data[:n_train, :], target_labels=train_labels[:n_train], iters=50,
                         target='supervised', batch_size=128, verbose=True)
 
     elif method == 's-lda-2x':
         # SEF output dimensions are not limited
         proj = LinearSEF(train_data.shape[1], output_dimensionality=2 * (n_classes - 1), regularizer_weight=0.001)
-        proj.init(train_data[:n_train, :])
-
         loss = proj.fit(data=train_data[:n_train, :], target_labels=train_labels[:n_train], iters=50,
                         target='supervised', batch_size=128, verbose=True)
 

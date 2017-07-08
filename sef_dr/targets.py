@@ -23,11 +23,11 @@ def sim_target_supervised(target_data, target_labels, sigma, idx, target_params)
     """
     Sets as target to bring close the points of the same class, and increase the distance of the points of different
      classes
-    :param target_data:
-    :param target_labels:
-    :param sigma:
-    :param idx:
-    :return:
+    :param target_data: (not used)
+    :param target_labels: the target labels
+    :param sigma: (not used)
+    :param idx: indices of the data samples to be used for the calculation of the similarity matrix
+    :return: the similarity matrix and the corresponding mask 
     """
 
     cur_labels = target_labels[idx]
@@ -66,12 +66,12 @@ def sim_target_supervised(target_data, target_labels, sigma, idx, target_params)
 def sim_target_svm(target_data, target_labels, sigma, idx, target_params):
     """
     Sets as target to mimic the SVM-based similarity (SVM-based analysis)
-    :param target_data:
-    :param target_labels:
-    :param sigma:
-    :param idx:
-    :param target_params:
-    :return:
+    :param target_data: target data
+    :param target_labels: target labels
+    :param sigma: (not used)
+    :param idx: indices of the data samples to be used for the calculation of the similarity matrix
+    :param target_params: expected to find the 'model', the used 'scaler' and the number of labels ('n_labels')
+    :return: the similarity matrix and the corresponding mask 
     """
 
     def get_ovo_indices(n_labels):
@@ -115,4 +115,24 @@ def sim_target_svm(target_data, target_labels, sigma, idx, target_params):
 
     g = np.mean(G)
     Gt = np.exp(-G / (g ** 2))
+    return np.float32(Gt), np.float32(Gt_mask)
+
+
+def sim_target_fixed(target_data, target_labels, sigma, idx, target_params):
+    """
+    Sets as target to have fixed similarity between all the training samples
+    :param target_data: (not used)
+    :param target_labels: (not used)
+    :param sigma: not used
+    :param idx: indices of the data samples to be used for the calculation of the similarity matrix
+    :param target_params: expect to found the 'target_value' here
+    :return: the similarity matrix and the corresponding mask 
+    """
+    if 'target_value' not in target_params:
+        target_params['target_value'] = 0.0
+
+    Gt = np.ones((len(idx), len(idx)))
+    Gt =  Gt * target_params['target_value']
+    Gt_mask = np.ones_like(Gt)
+
     return np.float32(Gt), np.float32(Gt_mask)
