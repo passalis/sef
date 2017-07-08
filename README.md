@@ -75,7 +75,7 @@ def custom_similarity_function(target_data, target_labels, sigma, idx,
     return np.float32(Gt), np.float32(Gt_mask)
 ```
 
-The *target_data*, *target_labels*, *sigma*, and *target_params* are passed to the *.fit()* function. During the training this function is called with a different set of indices *idx* and it is expected to return the target similarity matrix for the data that corresponds indeces defined by *idx*. 
+The *target_data*, *target_labels*, *sigma*, and *target_params* are passed to the *.fit()* function. During the training this function is called with a different set of indices *idx* and it is expected to return the target similarity matrix for the data that corresponds indices defined by *idx*. 
 
 For example, let's define a function that sets a target similarity of 0.8 for the samples that belong to the same class, and 0.1 for the samples that belong to different classes:
 
