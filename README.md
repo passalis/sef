@@ -50,8 +50,8 @@ In [examples/linear_outofsample.py](examples/linear_outofsample.py) and [example
 | Method     | Accuracy |
 | --------|---------|
 | Linear Regression |  89.48%  | 
-| Kernel SEF 10d | 86.84 % | 
-| Kernel SEF 20d | **90.43%** | 
+| Kernel SEF 10d | 87.74% | 
+| Kernel SEF 20d | **90.24%** | 
 
 ### 4. Perform SVM-based analysis!
 In [examples/svm_approximation.py](examples/svm_approximation.py) an SVM-based analysis technique that mimics the similarity induced by the hyperplanes of the 1-vs-1 SVMs is used to perform DR. This method allows for using a light-weight classifier, such as the NCC, to perform fast classification.
@@ -59,8 +59,8 @@ In [examples/svm_approximation.py](examples/svm_approximation.py) an SVM-based a
 | Method     | Accuracy |
 | -----------|---------|
 | NCC - Original |  80.84%  | 
-| NCC - Linear SEF 10d | 85.50 % | 
-| NCC - Linear SEF 20d  | **86.41%** | 
+| NCC - Linear SEF 10d | 85.90% | 
+| NCC - Linear SEF 20d  | **86.36%** | 
 
 ### 5. Deriving a new DR method becomes simply a matter of defining a custom similarity target!
 
