@@ -1,4 +1,5 @@
 # License: MIT License https://github.com/passalis/sef/blob/master/LICENSE.txt
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 import numpy as np
 import sklearn
@@ -37,15 +38,15 @@ def outofsample_extensions(method='linear-regression'):
         acc = evaluate_svm(proj.transform(train_data[:n_train_samples, :]), train_labels[:n_train_samples],
                            proj.transform(test_data), test_labels)
 
-    print "Method: ", method, " Test accuracy: ", 100 * acc, " %"
+    print("Method: ", method, " Test accuracy: ", 100 * acc, " %")
 
 
 if __name__ == '__main__':
-    print "Evaluating baseline linear-regression (10d) for providing out-of-sample extensions..."
+    print("Evaluating baseline linear-regression (10d) for providing out-of-sample extensions...")
     outofsample_extensions('linear-regression')
 
-    print "Evaluating linear SEF (10d) for providing out-of-sample extensions..."
+    print("Evaluating linear SEF (10d) for providing out-of-sample extensions...")
     outofsample_extensions('c-ISOMAP-10d')
 
-    print "Evaluating linear SEF (10d) for providing out-of-sample extensions..."
+    print("Evaluating linear SEF (10d) for providing out-of-sample extensions...")
     outofsample_extensions('c-ISOMAP-20d')

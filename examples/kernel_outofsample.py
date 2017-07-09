@@ -1,4 +1,5 @@
 # License: MIT License https://github.com/passalis/sef/blob/master/LICENSE.txt
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 import numpy as np
 import sklearn
@@ -21,7 +22,7 @@ def outofsample_extensions(method='kernel-regression'):
     isomap = Isomap(n_components=10, n_neighbors=20)
     train_data_isomap = np.float32(isomap.fit_transform(train_data[:n_train_samples, :]))
     sigma = mean_data_distance(np.float32(train_data[:n_train_samples, :]))
-    print "Sigma = ", sigma
+
     if method == 'kernel-regression':
         # Use kernel regression to provide baseline out-of-sample extensions
         proj = KernelRidge(kernel='rbf', gamma=(1.0 / sigma ** 2))
@@ -42,15 +43,16 @@ def outofsample_extensions(method='kernel-regression'):
         acc = evaluate_svm(proj.transform(train_data[:n_train_samples, :]), train_labels[:n_train_samples],
                            proj.transform(test_data), test_labels)
 
-    print "Method: ", method, " Test accuracy: ", 100 * acc, " %"
+    print("Method: ", method, " Test accuracy: ", 100 * acc, " %")
 
 
 if __name__ == '__main__':
-    print "Evaluating baseline kernel-regression (10d) for providing out-of-sample extensions..."
+    print("Evaluating baseline kernel-regression (10d) for providing out-of-sample extensions...")
     outofsample_extensions('kernel-regression')
 
-    print "Evaluating kernel SEF (10d) for providing out-of-sample extensions..."
+    print("Evaluating kernel SEF (10d) for providing out-of-sample extensions...")
     outofsample_extensions('cK-ISOMAP-10d')
 
-    print "Evaluating kernel SEF (20d) for providing out-of-sample extensions..."
+    print("Evaluating kernel SEF (20d) for providing out-of-sample extensions...")
     outofsample_extensions('cK-ISOMAP-20d')
+

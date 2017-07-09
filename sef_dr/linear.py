@@ -1,11 +1,12 @@
 # License: MIT License https://github.com/passalis/sef/blob/master/LICENSE.txt
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 import numpy as np
 import theano
 import theano.tensor as T
 from sklearn.decomposition import PCA
-from sef_base import SEF_Base
-from sef_dr.similarity import mean_data_distance
+from .sef_base import SEF_Base
+from .similarity import mean_data_distance
 from lasagne.updates import adam
 
 

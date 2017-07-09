@@ -1,4 +1,5 @@
 # License: MIT License https://github.com/passalis/sef/blob/master/LICENSE.txt
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 import numpy as np
 import sklearn
@@ -33,15 +34,17 @@ def supervised_reduction(method=None):
     acc = evaluate_svm(proj.transform(train_data[:n_train, :]), train_labels[:n_train],
                        proj.transform(test_data), test_labels)
 
-    print "Method: ", method, " Test accuracy: ", 100 * acc, " %"
+    print("Method: ", method, " Test accuracy: ", 100 * acc, " %")
 
 
 if __name__ == '__main__':
-    print "LDA: "
+    print("LDA: ")
     supervised_reduction('lda')
 
-    print "S-LDA: "
+    print("S-LDA: ")
     supervised_reduction('s-lda')
 
-    print "S-LDA (2x): "
+    print("S-LDA (2x): ")
     supervised_reduction('s-lda-2x')
+
+

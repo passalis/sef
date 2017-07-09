@@ -1,4 +1,5 @@
 # License: MIT License https://github.com/passalis/sef/blob/master/LICENSE.txt
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 import numpy as np
 import sklearn
@@ -48,18 +49,18 @@ def unsupervised_approximation(method='pca'):
         acc = evaluate_ncc(proj.transform(train_data[:n_train, :]), train_labels[:n_train],
                            proj.transform(test_data), test_labels)
 
-    print "Method: ", method, " Test accuracy: ", 100 * acc, " %"
-
+    print("Method: ", method, " Test accuracy: ", 100 * acc, " %")
 
 if __name__ == '__main__':
-    print "Evaluating baseline SVM ..."
+    print("Evaluating baseline SVM ...")
     unsupervised_approximation('svm')
 
-    print "Evaluating baseline NCC"
+    print("Evaluating baseline NCC")
     unsupervised_approximation('ncc')
 
-    print "Evaluating SVM-based analysis 10d"
+    print("Evaluating SVM-based analysis 10d")
     unsupervised_approximation('S-SVM-A-10d')
 
-    print "Evaluating SVM-based analysis 20d"
+    print("Evaluating SVM-based analysis 20d")
     unsupervised_approximation('S-SVM-A-20d')
+

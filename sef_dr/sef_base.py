@@ -1,12 +1,13 @@
 # License: MIT License https://github.com/passalis/sef/blob/master/LICENSE.txt
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 import numpy as np
 import theano
 import theano.tensor as T
 import time
 from sklearn.preprocessing import StandardScaler
-from targets import sim_target_copy, sim_target_supervised, sim_target_svm, sim_target_fixed
-from sef_dr.similarity import mean_data_distance, sym_similarity_matrix
+from .targets import sim_target_copy, sim_target_supervised, sim_target_svm, sim_target_fixed
+from .similarity import mean_data_distance, sym_similarity_matrix
 
 
 class SEF_Base(object):
@@ -142,7 +143,7 @@ class SEF_Base(object):
 
             loss[i] = cur_loss
             if verbose:
-                print 'Iteration: ', i, 'Loss: ', loss[i], " Time left: ", (iters - i - 1) * (epoch_end - epoch_start)
+                print('Iteration: ', i, 'Loss: ', loss[i], " Time left: ", (iters - i - 1) * (epoch_end - epoch_start))
 
         return np.squeeze(loss)
 

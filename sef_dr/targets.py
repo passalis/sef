@@ -1,7 +1,8 @@
 # License: MIT License https://github.com/passalis/sef/blob/master/LICENSE.txt
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 import numpy as np
-from sef_dr.similarity import fast_similarity_matrix_fn
+from .similarity import fast_similarity_matrix_fn
 
 
 def sim_target_copy(target_data, target_labels, sigma, idx, target_params):
