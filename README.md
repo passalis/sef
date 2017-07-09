@@ -135,6 +135,8 @@ cd sef
 python setup.py install --user
 </pre>
 
+Currently only *float32* are supported, so set *floatX=float32* (.theanorc).
+
 PySEF is developed and tested on Linux (both Python 2.7 and Python 3 are supported). However, it is expected to run on Windows/Mac OSX as well, since all of its components are cross-platform.
 
 ## Further reading
