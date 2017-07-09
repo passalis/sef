@@ -1,3 +1,5 @@
+# License: MIT License https://github.com/passalis/sef/blob/master/LICENSE.txt
+
 import numpy as np
 from sef_dr.similarity import fast_similarity_matrix_fn
 

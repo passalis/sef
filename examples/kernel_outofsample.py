@@ -1,8 +1,9 @@
+# License: MIT License https://github.com/passalis/sef/blob/master/LICENSE.txt
+
 import numpy as np
 import sklearn
 from sklearn.kernel_ridge import KernelRidge
 from sklearn.manifold import Isomap
-
 from classification import evaluate_svm
 from mnist import load_mnist
 from sef_dr.kernel import KernelSEF

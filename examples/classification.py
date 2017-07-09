@@ -1,3 +1,5 @@
+# License: MIT License https://github.com/passalis/sef/blob/master/LICENSE.txt
+
 from sklearn import svm, grid_search
 from sklearn.neighbors import NearestCentroid
 from sklearn.preprocessing import MinMaxScaler

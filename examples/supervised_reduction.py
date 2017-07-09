@@ -1,3 +1,5 @@
+# License: MIT License https://github.com/passalis/sef/blob/master/LICENSE.txt
+
 import numpy as np
 import sklearn
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis

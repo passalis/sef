@@ -1,7 +1,9 @@
-import time
+# License: MIT License https://github.com/passalis/sef/blob/master/LICENSE.txt
+
 import numpy as np
 import theano
 import theano.tensor as T
+import time
 from sklearn.preprocessing import StandardScaler
 from targets import sim_target_copy, sim_target_supervised, sim_target_svm, sim_target_fixed
 from sef_dr.similarity import mean_data_distance, sym_similarity_matrix
