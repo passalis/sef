@@ -135,6 +135,8 @@ cd sef
 python setup.py install --user
 </pre>
 
+PySEF is developed and tested on Linux. However, it is expected to run on Windows/Mac OSX as well, since all of its components are cross-platform.
+
 ## Further reading
 
 You can find more details about the Similarity Embedding Framework in our [paper](https://arxiv.org/abs/1706.05692).
