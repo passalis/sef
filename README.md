@@ -124,7 +124,7 @@ Close enough! The samples of the same class have been arranged in circles, while
 
 ## Are there any tutorials?
 
-Yes! Check out the notebooks in the [tutorials](tutorials) folder!
+Yes! Check out the notebooks in the [tutorials](tutorials) folder (Python 2.7 only)!
 
 ## How to install PySEF?
 
@@ -135,7 +135,7 @@ cd sef
 python setup.py install --user
 </pre>
 
-PySEF is developed and tested on Linux. However, it is expected to run on Windows/Mac OSX as well, since all of its components are cross-platform.
+PySEF is developed and tested on Linux (both Python 2.7 and Python 3 are supported). However, it is expected to run on Windows/Mac OSX as well, since all of its components are cross-platform.
 
 ## Further reading
 
