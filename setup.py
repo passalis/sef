@@ -10,6 +10,11 @@ setup(
     url='https://github.com/passalis/sef_dr',
     license='LICENSE.txt',
     description='Package that implements the Similatiry Embedding Framework on top of the theano.',
+    setup_requires=[
+        "lasagne >= 0.2.dev1",
+        "scikit-learn >= 0.18.1",
+        "theano>= 0.9",
+    ],
     install_requires=[
         "lasagne >= 0.2.dev1",
         "scikit-learn >= 0.18.1",
