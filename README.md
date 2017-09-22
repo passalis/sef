@@ -139,6 +139,14 @@ Currently only *float32* are supported, so set *floatX=float32* (.theanorc).
 
 PySEF is developed and tested on Linux (both Python 2.7 and Python 3 are supported). However, it is expected to run on Windows/Mac OSX as well, since all of its components are cross-platform.
 
+### Issues
+If the installed version of *lasagne* does not match the installed *theano* version you may receive the following error: "ImportError: cannot import name 'downsample'" (*lasagne* does not frequently freeze the versions, so it is difficult to specify the version that you should install ). Installing the bleeding edge versions of both *lasagna* and *theano* should resolve the issue:
+
+<pre>
+pip install --upgrade https://github.com/Theano/Theano/archive/master.zip
+pip install --upgrade https://github.com/Lasagne/Lasagne/archive/master.zip
+</pre>
+
 ## Further reading
 
 You can find more details about the Similarity Embedding Framework in our [paper](https://arxiv.org/abs/1706.05692).
