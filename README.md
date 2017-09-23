@@ -43,13 +43,13 @@ In [examples/linear_outofsample.py](examples/linear_outofsample.py) and [example
 
 | Method     | Accuracy |
 | --------|---------|
-| Linear Regression |  85.25%  | 
+| Linear Regression 10d |  85.25%  | 
 | Linear SEF 10d | 85.94% | 
 | Linear SEF 20d |  **89.03%** | 
 
 | Method     | Accuracy |
 | --------|---------|
-| Linear Regression |  89.48%  | 
+| Kernel Regression 10d |  89.48%  | 
 | Kernel SEF 10d | 87.74% | 
 | Kernel SEF 20d | **90.24%** | 
 
