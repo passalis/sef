@@ -157,8 +157,9 @@ If you use PySEF for research, please cite the following paper:
 @article{passalis2017dimensionality,
   title={Dimensionality Reduction using Similarity-induced Embeddings},
   author={Passalis, Nikolaos and Tefas, Anastasios},
-  journal={arXiv preprint arXiv:1706.05692},
-  year={2017}
+  journal={IEEE Transactions on Neural Networks and Learning Systems},
+  year={2017},
+  volume={(to appear)}
 }
 </pre>
 
