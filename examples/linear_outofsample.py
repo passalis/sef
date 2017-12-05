@@ -30,11 +30,13 @@ def outofsample_extensions(method='linear-regression'):
     elif method == 'c-ISOMAP-10d' or method == 'c-ISOMAP-20d':
         # Use the SEF to provide out-of-sample extensions
         if method == 'c-ISOMAP-10d':
-            proj = LinearSEF(train_data.shape[1], output_dimensionality=10, learning_rate=0.001)
+            proj = LinearSEF(train_data.shape[1], output_dimensionality=10)
+            proj.cuda()
         else:
-            proj = LinearSEF(train_data.shape[1], output_dimensionality=20, learning_rate=0.001)
+            proj = LinearSEF(train_data.shape[1], output_dimensionality=20)
+            proj.cuda()
         loss = proj.fit(data=train_data[:n_train_samples, :], target_data=train_data_isomap, target='copy',
-                        iters=50, batch_size=128, verbose=True)
+                        epochs=50, batch_size=128, verbose=True, learning_rate=0.001)
         acc = evaluate_svm(proj.transform(train_data[:n_train_samples, :]), train_labels[:n_train_samples],
                            proj.transform(test_data), test_labels)
 

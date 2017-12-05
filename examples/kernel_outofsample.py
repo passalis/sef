@@ -37,9 +37,10 @@ def outofsample_extensions(method='kernel-regression'):
             dims = 20
 
         proj = KernelSEF(train_data[:n_train_samples], train_data.shape[1], output_dimensionality=dims,
-                         learning_rate=0.0001, regularizer_weight=0.001)
+                          regularizer_weight=0.001)
+        proj.cuda()
         loss = proj.fit(data=train_data[:n_train_samples, :], target_data=train_data_isomap, target='copy',
-                        iters=50, batch_size=128, verbose=True)
+                        epochs=50, batch_size=128, verbose=True, learning_rate=0.0001)
         acc = evaluate_svm(proj.transform(train_data[:n_train_samples, :]), train_labels[:n_train_samples],
                            proj.transform(test_data), test_labels)
 

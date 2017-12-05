@@ -7,17 +7,15 @@ setup(
     author='N. Passalis',
     author_email='passalis@csd.auth.gr',
     packages=['sef_dr',],
-    url='https://github.com/passalis/sef_dr',
+    url='https://github.com/passalis/pysef',
     license='LICENSE.txt',
-    description='Package that implements the Similatiry Embedding Framework on top of the theano.',
+    description='Package that implements the Similarity Embedding Framework on top of the PyTorch library.',
     setup_requires=[
-        "lasagne >= 0.2.dev1",
-        "scikit-learn >= 0.18.1",
-        "theano>= 0.9",
+        "scikit-learn >= 0.19.1",
+	    "numpy >= 1.13.3"
     ],
     install_requires=[
-        "lasagne >= 0.2.dev1",
-        "scikit-learn >= 0.18.1",
-        "theano>= 0.9",
+        "scikit-learn >= 0.19.1",
+	    "numpy >= 1.13.3"
     ],
 )

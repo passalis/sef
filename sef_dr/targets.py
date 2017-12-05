@@ -2,21 +2,21 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import numpy as np
-from .similarity import fast_similarity_matrix_fn
+from .similarity import fast_heat_similarity_matrix
 
 
 def sim_target_copy(target_data, target_labels, sigma, idx, target_params):
     """
     Sets as target to maintain the similarity between the data
-    :param target_data: the target data (to mimic) 
+    :param target_data: the target data (to mimic)
     :param target_labels: (not used)
     :param sigma: scaling factor used to calculate the similarity matrix
     :param idx: indices of the data samples to be used for the calculation of the similarity matrix
-    :return: the similarity matrix and the corresponding mask 
+    :return: the similarity matrix and the corresponding mask
     """
 
     cur_data = target_data[idx]
-    Gt = fast_similarity_matrix_fn(cur_data, sigma)
+    Gt = fast_heat_similarity_matrix(cur_data, sigma)
     Gt_mask = np.ones_like(Gt)
 
     return Gt, np.float32(Gt_mask)
@@ -30,7 +30,7 @@ def sim_target_supervised(target_data, target_labels, sigma, idx, target_params)
     :param target_labels: the target labels
     :param sigma: (not used)
     :param idx: indices of the data samples to be used for the calculation of the similarity matrix
-    :return: the similarity matrix and the corresponding mask 
+    :return: the similarity matrix and the corresponding mask
     """
 
     cur_labels = target_labels[idx]
@@ -74,7 +74,7 @@ def sim_target_svm(target_data, target_labels, sigma, idx, target_params):
     :param sigma: (not used)
     :param idx: indices of the data samples to be used for the calculation of the similarity matrix
     :param target_params: expected to find the 'model', the used 'scaler' and the number of labels ('n_labels')
-    :return: the similarity matrix and the corresponding mask 
+    :return: the similarity matrix and the corresponding mask
     """
 
     def get_ovo_indices(n_labels):
@@ -129,13 +129,13 @@ def sim_target_fixed(target_data, target_labels, sigma, idx, target_params):
     :param sigma: not used
     :param idx: indices of the data samples to be used for the calculation of the similarity matrix
     :param target_params: expect to found the 'target_value' here
-    :return: the similarity matrix and the corresponding mask 
+    :return: the similarity matrix and the corresponding mask
     """
     if 'target_value' not in target_params:
         target_params['target_value'] = 0.0
 
     Gt = np.ones((len(idx), len(idx)))
-    Gt =  Gt * target_params['target_value']
+    Gt = Gt * target_params['target_value']
     Gt_mask = np.ones_like(Gt)
 
     return np.float32(Gt), np.float32(Gt_mask)
