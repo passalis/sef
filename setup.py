@@ -7,7 +7,7 @@ setup(
     author='N. Passalis',
     author_email='passalis@csd.auth.gr',
     packages=['sef_dr',],
-    url='https://github.com/passalis/pysef',
+    url='https://github.com/passalis/sef',
     license='LICENSE.txt',
     description='Package that implements the Similarity Embedding Framework on top of the PyTorch library.',
     setup_requires=[
