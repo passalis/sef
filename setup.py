@@ -12,10 +12,14 @@ setup(
     description='Package that implements the Similarity Embedding Framework on top of the PyTorch library.',
     setup_requires=[
         "scikit-learn >= 0.19.1",
-	    "numpy >= 1.13.3"
+	"numpy >= 1.13.3",
+        "scipy >= 1.0.0"
+
     ],
     install_requires=[
         "scikit-learn >= 0.19.1",
-	    "numpy >= 1.13.3"
+        "numpy >= 1.13.3",
+        "scipy >= 1.0.0"
+
     ],
 )
