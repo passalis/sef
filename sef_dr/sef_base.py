@@ -100,8 +100,10 @@ class SEF_Base(object):
 
         return results
 
-    def fit_transform(self, data, iters, batch_size=128, verbose=False, target='copy', target_data=None,
-                      target_labels=None, target_sigma=None, target_params={}, warm_start=False):
+    def fit_transform(self, data, epochs, batch_size=128, verbose=False, target='copy', target_data=None,
+                      target_labels=None, target_sigma=None, target_params={}, warm_start=False,
+                      learning_rate=0.0001, regularizer_weight=0.001
+                      ):
         """
         Optimizes the similarity embedding and returns the projected data
         :param data: the data used for the optimization
@@ -113,11 +115,13 @@ class SEF_Base(object):
         :param batch_size: the used batch size
         :param verbose: if set to True, then outputs information regarding the optimization process
         :param warm_start: if set to True, does not initialize the embedding function
+        :param learning_rate: the learning rate to be used for the optimization
+        :param regularizer_weight: the weight of the used regularizer (real number beetween 0 to 1)
         :return:
         """
-        self.fit(data, iters, batch_size, verbose, target, target_data, target_labels, target_sigma, target_params,
-                 warm_start)
-        return self.transform(data)
+        self.fit(data, epochs, batch_size, verbose, target, target_data, target_labels, target_sigma, target_params,
+                 warm_start, learning_rate, regularizer_weight)
+        return self.transform(data, batch_size=batch_size)
 
     def fit(self, data, epochs, batch_size=128, verbose=False, target='copy', target_data=None, target_labels=None,
             target_sigma=None, target_params={}, warm_start=False, learning_rate=0.0001, regularizer_weight=0.001):
@@ -134,6 +138,7 @@ class SEF_Base(object):
         :param warm_start: if set to True, it does not initialize the embedding function (allows for
                             finetuning the embedding)
         :param learning_rate: the learning rate to be used for the optimization
+        :param regularizer_weight: the weight of the used regularizer (real number beetween 0 to 1)
         :return:
         """
 
