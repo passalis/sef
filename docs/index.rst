@@ -9,12 +9,9 @@ Welcome to PySEF's documentation!
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+    
+   installation
+   usage
+   extending
 
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
