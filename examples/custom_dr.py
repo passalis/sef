@@ -40,8 +40,9 @@ if __name__ == '__main__':
     train_data, train_labels = train_data[:100, :], train_labels[:100]
 
     # Perform DR
-    proj = KernelSEF(train_data, train_data.shape[0], 2, sigma=1, learning_rate=0.0001, regularizer_weight=0)
-    proj.fit(train_data, target_labels=train_labels, target=sim_target_supervised, iters=500, verbose=True)
+    proj = KernelSEF(train_data, train_data.shape[0], 2, sigma=1)
+    proj.fit(train_data, target_labels=train_labels, target=sim_target_supervised, epochs=500,  learning_rate=0.0001, regularizer_weight=0,
+             verbose=True)
     train_data = proj.transform(train_data)
 
     # Plot the results

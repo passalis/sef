@@ -41,11 +41,11 @@ def unsupervised_approximation(method='pca'):
             dims = 10
         else:
             dims = 20
-        proj = LinearSEF(train_data.shape[1], output_dimensionality=dims, regularizer_weight=0.001)
+        proj = LinearSEF(train_data.shape[1], output_dimensionality=dims)
         proj.cuda()
         loss = proj.fit(data=train_data[:n_train, :], target_data=train_data[:n_train, :],
                         target_labels=train_labels[:n_train], target='svm', target_params=params, epochs=50,
-                        learning_rate=0.001, batch_size=128, verbose=True)
+                        learning_rate=0.001, batch_size=128, verbose=True, regularizer_weight=0.001)
 
         acc = evaluate_ncc(proj.transform(train_data[:n_train, :]), train_labels[:n_train],
                            proj.transform(test_data), test_labels)

@@ -30,10 +30,10 @@ def unsupervised_approximation(method='pca'):
         target_data = np.float32(proj_to_copy.transform(train_data[:n_train_samples, :]))
 
         # Approximate it using the SEF and 10 dimensions
-        proj = LinearSEF(train_data.shape[1], output_dimensionality=10, regularizer_weight=0.001)
+        proj = LinearSEF(train_data.shape[1], output_dimensionality=10)
         proj.cuda()
         loss = proj.fit(data=train_data[:n_train_samples, :], target_data=target_data, target='copy',
-                        epochs=50, batch_size=128, verbose=True, learning_rate=0.001)
+                        epochs=50, batch_size=128, verbose=True, learning_rate=0.001, regularizer_weight=0.001)
 
     # Evaluate the method
     acc = evaluate_svm(proj.transform(train_data[:n_train_samples, :]), train_labels[:n_train_samples],

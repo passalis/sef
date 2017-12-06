@@ -17,11 +17,12 @@ def mean_data_distance(data):
     return mean_distance
 
 
-def sym_distance_matrix(A, B):
+def sym_distance_matrix(A, B, eps=1e-18):
     """
     Defines the symbolic matrix that contains the distances between the vectors of A and B
-    :param A:
-    :param B:
+    :param A: the first data matrix
+    :param B: the second data matrix
+    :params eps: the minimum distance between two vectors (set to a very small number to improve stability)
     :return:
     """
     # Compute the squared distances
@@ -36,7 +37,7 @@ def sym_distance_matrix(A, B):
     D = D.view(A.size(0), B.size(0))
 
     # Return the square root
-    D = torch.sqrt(torch.clamp(D, min=0))
+    D = torch.sqrt(torch.clamp(D, min=eps))
 
     return D
 

@@ -11,8 +11,7 @@ from torch.autograd import Variable
 
 
 class LinearSEF(SEF_Base):
-    def __init__(self, input_dimensionality, output_dimensionality, regularizer_weight=0.001,
-                 scaler=None):
+    def __init__(self, input_dimensionality, output_dimensionality, scaler=None):
         """
         Creats a Linear SEF object
         :param input_dimensionality: dimensionality of the input space
@@ -24,7 +23,6 @@ class LinearSEF(SEF_Base):
 
         # Call base constructor
         SEF_Base.__init__(self, input_dimensionality, output_dimensionality, scaler)
-        self.regularizer_weight = regularizer_weight
 
         # Projection weights variables
         W = np.float32(0.1 * np.random.randn(self.input_dimensionality, output_dimensionality))
@@ -64,7 +62,7 @@ class LinearSEF(SEF_Base):
             regularizer = torch.mm(self.W.transpose(0, 1), self.W) - Variable(torch.eye(self.W.size(1)).cuda())
         else:
             regularizer = torch.mm(self.W.transpose(0, 1), self.W) - Variable(torch.eye(self.W.size(1)))
-        return 0.5 * self.regularizer_weight * torch.sum(regularizer ** 2) / (self.W.size(1) ** 2)
+        return 0.5 * torch.sum(regularizer ** 2) / (self.W.size(1) ** 2)
 
     def _sym_project(self, X):
         return torch.mm(X, self.W)

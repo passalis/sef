@@ -120,7 +120,7 @@ class SEF_Base(object):
         return self.transform(data)
 
     def fit(self, data, epochs, batch_size=128, verbose=False, target='copy', target_data=None, target_labels=None,
-            target_sigma=None, target_params={}, warm_start=False, learning_rate=0.0001):
+            target_sigma=None, target_params={}, warm_start=False, learning_rate=0.0001, regularizer_weight=0.001):
         """
         Optimizes the similarity embedding
         :param data: the data used for the optimization
@@ -188,7 +188,8 @@ class SEF_Base(object):
                 if self.use_gpu:
                     cur_data, G_target, G_target_mask = cur_data.cuda(), G_target.cuda(), G_target_mask.cuda()
 
-                torch_loss = self._sym_squared_loss(cur_data, G_target, G_target_mask) + self._regularizer()
+                torch_loss = (2-regularizer_weight)*self._sym_squared_loss(cur_data, G_target, G_target_mask) \
+                                                   + regularizer_weight*self._regularizer()
 
                 torch_loss.backward()
                 optimizer.step()
@@ -214,7 +215,8 @@ class SEF_Base(object):
                 if self.use_gpu:
                     cur_data, G_target, G_target_mask = cur_data.cuda(), G_target.cuda(), G_target_mask.cuda()
 
-                torch_loss = self._sym_squared_loss(cur_data, G_target, G_target_mask) + self._regularizer()
+                torch_loss = (2-regularizer_weight)*self._sym_squared_loss(cur_data, G_target, G_target_mask) \
+                                                   + regularizer_weight*self._regularizer()
 
                 torch_loss.backward()
                 optimizer.step()
@@ -242,7 +244,9 @@ class SEF_Base(object):
         :return: the symbolic loss
         """
         Y = self._sym_project(X)
+
         G = sym_heat_similarity_matrix(Y, self.sigma_projection)
+
         loss = torch.sum(((G - G_target) ** 2) * G_target_mask) / torch.sum(G_target_mask)
         return loss
 
