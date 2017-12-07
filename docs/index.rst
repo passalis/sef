@@ -6,7 +6,7 @@
 Welcome to PySEF's documentation!
 =================================
 
-*PySEF* provides an implementation of the Similarity Embedding Framework (SEF) on top of the *PyTorch* library. *PySEF* an easy to use scikit-learn-like interface, allows for easily implementing novel dimensionality reduction techniques and can efficiently handle large-scale dataset using the GPU.
+*PySEF* provides an implementation of the Similarity Embedding Framework (SEF) on top of the *PyTorch* library. *PySEF* is an easy to use Python library that exposes a *scikit-learn*-like interface, allows for easily implementing novel dimensionality reduction techniques and can efficiently handle large-scale dataset using the GPU.
 
 
 What is the Similarity Embedding Framework?

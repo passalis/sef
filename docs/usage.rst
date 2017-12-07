@@ -12,12 +12,12 @@ After installing PySEF (see :ref:`installation-link`), simply import sef_dr, cre
     transformed_data = proj.transform(data)
 
 
-The *input_dimensionality* parameter defines the dimensionality of the input features, while the *output_dimensionality* refers to the desired dimensionality of the data. Then, we can learn the projection using the *.fit()* function. The method that will be used for reducing the dimensionality of the data is specified in the *target* parameter of the *.fit()* method (PySEF provides many predefined target/methods for dimensionality reduction, even though new methods can be also easily implemented as shown in :ref:`extending-link`). Several different dimensionality reduction scenarios are discussed in the following sections (for all the conducted experiments the well-known `MNIST <http://yann.lecun.com/exdb/mnist/>`_ dataset is used).
+The *input_dimensionality* parameter defines the dimensionality of the input data, while the *output_dimensionality* refers to the desired dimensionality of the data. Then, we can learn the projection using the *.fit()* function. The method that will be used for reducing the dimensionality of the data is specified in the *target* parameter of the *.fit()* method (PySEF provides many predefined targets/methods for dimensionality reduction, even though new methods can be also easily implemented as shown in :ref:`extending-link`). Several different dimensionality reduction scenarios are discussed in the following sections (for all the conducted experiments the well-known `MNIST <http://yann.lecun.com/exdb/mnist/>`_ dataset is used).
 
 Using GPU acceleration
 ======================
 
-Following the PyTorch calling conventions, to use GPU for the optimization/projection the *.cuda()* method can be used::
+Following the PyTorch calling conventions, to use the GPU for the optimization/projection the *.cuda()* method can be used::
 
     proj.cuda()
 
@@ -55,7 +55,7 @@ PCA 10-d                        82.88%
 
 Re-deriving similarity-based versions of well-known techniques
 ===============================================================
-In `supervised_reduction.py <https://github.com/passalis/sef/blob/master/examples/supervised_reduction.py>`_ we demonstrate how to re-deriving similarity-based versions of well-known techniques. More specifically, a similarity-based LDA-like technique is derived::
+In `supervised_reduction.py <https://github.com/passalis/sef/blob/master/examples/supervised_reduction.py>`_ we demonstrate how to rederive similarity-based versions of well-known techniques. More specifically, a similarity-based LDA-like technique is derived::
 
     proj = LinearSEF(train_data.shape[1], output_dimensionality=(n_classes - 1))
     proj.cuda()

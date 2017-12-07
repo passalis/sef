@@ -6,16 +6,16 @@ Installation
 
 Recommended (pip-based) installation
 ====================================
-A working installation of PyTorch is required before installing PySEF. To install PyTorch, please follow the instructions given in `PyTorch site <http://http://pytorch.org/>`_.
+A working installation of PyTorch is required before installing PySEF. To install PyTorch, please follow the instructions given in the `PyTorch site <http://http://pytorch.org/>`_.
 
 The recommended way to install PySEF is simply to use the *pip* package manager::
 
     pip install pysef
 
-All the other required dependecies will be automatically donwloaded and installed.
+All the other required dependecies will be automatically downloaded and installed.
 
 
-PySEF is developed and tested on Linux (both Python 2.7 and Python 3 are supported). However, it is expected to run on Windows/Mac OSX as well, since all of its components are cross-platform.
+PySEF is developed and tested on Linux (both Python 2.7 and Python 3.5 are supported). However, it is expected to run on Windows/Mac OSX as well, since all of its components are cross-platform.
 
 
 Bleeding-edge installation
@@ -36,4 +36,4 @@ Running the examples/tutorials
     pip install keras
     pip install tensorflow
     
-Note that these are only needed for the specific examples and they are not mandatory for running the *PySEF* library.
+Note that these are only needed for the specific examples and they are not mandatory for using the *PySEF* library.
