@@ -64,7 +64,7 @@ def fast_distance_matrix(A, B):
     :param use_gpu: set to True, if gpu must be used
     :return: the distance matrix
     """
-
+    use_gpu = False
     # Use GPU if available
     if torch.cuda.device_count() > 0:
         use_gpu = True
@@ -90,7 +90,7 @@ def fast_heat_similarity_matrix(X, sigma):
     :param sigma: scaling factor
     :return: the similarity matrix
     """
-
+    use_gpu = False
     # Use GPU if available
     if torch.cuda.device_count() > 0:
         use_gpu = True
