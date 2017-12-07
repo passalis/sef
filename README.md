@@ -1,6 +1,7 @@
 # PySEF: A Python Library for Similarity-based Dimensionality Reduction
 This package provides an implementation of the [Similarity Embedding Framework](https://arxiv.org/abs/1706.05692) (SEF) on top of the *PyTorch* library. The documentation of PySEF is available [here](https://pysef.readthedocs.io).
 
+[![Build Status](https://travis-ci.org/passalis/sef.svg?branch=master)](https://travis-ci.org/passalis/sef)
 [![Documentation Status](https://readthedocs.org/projects/pysef/badge/?version=latest)](http://pysef.readthedocs.io/en/latest/?badge=latest)
 
 ## What is the Similarity Embedding Framework?
