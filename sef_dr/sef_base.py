@@ -11,7 +11,7 @@ from torch.autograd import Variable
 
 
 class SEF_Base(object):
-    def __init__(self, input_dimensionality, output_dimensionality, scaler=None):
+    def __init__(self, input_dimensionality, output_dimensionality, scaler='default'):
         """
         SEF_Base constuctor
         :param input_dimensionality: dimensionality of the input space
@@ -102,8 +102,7 @@ class SEF_Base(object):
 
     def fit_transform(self, data, epochs, batch_size=128, verbose=False, target='copy', target_data=None,
                       target_labels=None, target_sigma=None, target_params={}, warm_start=False,
-                      learning_rate=0.0001, regularizer_weight=0.001
-                      ):
+                      learning_rate=0.0001, regularizer_weight=0.001):
         """
         Optimizes the similarity embedding and returns the projected data
         :param data: the data used for the optimization
@@ -144,6 +143,13 @@ class SEF_Base(object):
 
         if not warm_start:
             self._initialize(data)
+
+        # Scale the data
+        if self.scaler is not None:
+            data = np.float32(self.scaler.transform(data))
+        else:
+            data = np.float32(data)
+
 
         # Keep track of the loss during the optimization
         loss = np.zeros((epochs, 1))

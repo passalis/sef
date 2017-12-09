@@ -41,17 +41,19 @@ class KernelSEF(SEF_Base):
         if self.scaler is None:
             data = np.float32(data)
         else:
+            pass
             data = np.float32(self.scaler.fit_transform(data))
 
         # If the rbf kernel is used and no sigma is supplied, estimate it!
-        sigma_kernel = np.float32(mean_data_distance(data))
-
         if sigma == 0 and self.kernel_type == 'rbf':
+            sigma_kernel = np.float32(mean_data_distance(data))
             self.sigma_kernel = sigma_kernel
+        else:
+            self.sigma_kernel = 1
 
         # Use kPCA for initialization
         kpca = KernelPCA(kernel=self.kernel_type, n_components=self.output_dimensionality,
-                         gamma=(1.0 / (sigma_kernel ** 2)), degree=self.degree, eigen_solver='dense')
+                         gamma=(1.0 / (self.sigma_kernel ** 2)), degree=self.degree, eigen_solver='dense')
         kpca.fit(data)
         A = kpca.alphas_
         # Scale the coefficients to have unit norm (avoid rescaling)
@@ -70,12 +72,6 @@ class KernelSEF(SEF_Base):
         :param data: Data to be used for the initialization
         :return:
         """
-
-        if self.scaler is None:
-            data = np.float32(data)
-        else:
-            data = np.float32(self.scaler.transform(data))
-
         # Estimate the sigma projection value (this usually makes the optimization "easier")
         self.sigma_projection = np.float32(mean_data_distance(self.transform(data)))
 
@@ -85,8 +81,8 @@ class KernelSEF(SEF_Base):
         elif self.kernel_type == 'poly':
             K = (self.alpha * torch.dot(X, self.X_kernel.transpose(0, 1)) + self.c) ** self.degree
         elif self.kernel_type == 'rbf':
-            D = sym_distance_matrix(self.X_kernel, X)
-            K = torch.exp(-D ** 2 / (self.sigma_kernel ** 2)).transpose(0, 1)
+            D = sym_distance_matrix(X, self.X_kernel, self_similarity=False)
+            K = torch.exp(-D ** 2 / (self.sigma_kernel ** 2))
         else:
             raise Exception('Unknown kernel type: ', self.kernel_type)
         return K
@@ -102,5 +98,4 @@ class KernelSEF(SEF_Base):
         return 0.5 * torch.sum(regularizer ** 2) / (self.A.size(1) ** 2)
 
     def _sym_project(self, X):
-
         return torch.mm(self.symbolic_kernel(X), self.A)

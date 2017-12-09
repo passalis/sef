@@ -6,14 +6,14 @@ import sklearn
 from sklearn.kernel_ridge import KernelRidge
 from sklearn.manifold import Isomap
 from classification import evaluate_svm
-from mnist import load_mnist
+from newsgroups import load_20ng_dataset_bow
 from sef_dr.kernel import KernelSEF
 from sef_dr.sef_base import mean_data_distance
 
 
 def outofsample_extensions(method='kernel-regression'):
     # Load the data and init seeds
-    train_data, train_labels, test_data, test_labels = load_mnist()
+    train_data, train_labels, test_data, test_labels = load_20ng_dataset_bow()
     np.random.seed(1)
     sklearn.utils.check_random_state(1)
     n_train_samples = 5000
@@ -35,7 +35,6 @@ def outofsample_extensions(method='kernel-regression'):
             dims = 10
         else:
             dims = 20
-
         proj = KernelSEF(train_data[:n_train_samples], train_data.shape[1], output_dimensionality=dims)
         proj.cuda()
         loss = proj.fit(data=train_data[:n_train_samples, :], target_data=train_data_isomap, target='copy',

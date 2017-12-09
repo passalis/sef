@@ -5,13 +5,12 @@ import numpy as np
 import sklearn
 from sklearn.decomposition import PCA
 from classification import evaluate_svm
-from mnist import load_mnist
+from newsgroups import load_20ng_dataset_bow
 from sef_dr.linear import LinearSEF
-
 
 def unsupervised_approximation(method='pca'):
     # Load the data and init seeds
-    train_data, train_labels, test_data, test_labels = load_mnist()
+    train_data, train_labels, test_data, test_labels = load_20ng_dataset_bow()
     np.random.seed(1)
     sklearn.utils.check_random_state(1)
     n_train_samples = 5000
@@ -23,7 +22,6 @@ def unsupervised_approximation(method='pca'):
         proj.fit(train_data[:n_train_samples, :])
 
     elif method == 's-pca':
-
         # Learn a high dimensional projection
         proj_to_copy = PCA(n_components=50)
         proj_to_copy.fit(train_data[:n_train_samples, :])
@@ -34,7 +32,6 @@ def unsupervised_approximation(method='pca'):
         proj.cuda()
         loss = proj.fit(data=train_data[:n_train_samples, :], target_data=target_data, target='copy',
                         epochs=50, batch_size=128, verbose=True, learning_rate=0.001, regularizer_weight=1)
-
 
     # Evaluate the method
     acc = evaluate_svm(proj.transform(train_data[:n_train_samples, :]), train_labels[:n_train_samples],

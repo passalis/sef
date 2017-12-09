@@ -7,13 +7,13 @@ from sklearn import svm, grid_search
 from sklearn.preprocessing import MinMaxScaler
 
 from classification import evaluate_svm, evaluate_ncc
-from mnist import load_mnist
+from newsgroups import load_20ng_dataset_bow
 from sef_dr.linear import LinearSEF
-
+from sklearn.preprocessing import StandardScaler
 
 def unsupervised_approximation(method='pca'):
     # Load the data and init seeds
-    train_data, train_labels, test_data, test_labels = load_mnist()
+    train_data, train_labels, test_data, test_labels = load_20ng_dataset_bow()
     np.random.seed(1)
     sklearn.utils.check_random_state(1)
     n_train = 5000
@@ -26,17 +26,13 @@ def unsupervised_approximation(method='pca'):
     elif method == 'S-SVM-A-10d' or method == 'S-SVM-A-20d':
 
         # Learn an SVM
-        scaler = MinMaxScaler()
-        train_data = scaler.fit_transform(train_data)
-        test_data = scaler.transform(test_data)
 
         parameters = {'kernel': ['linear'], 'C': [0.0001, 0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000, 100000]}
         model = grid_search.GridSearchCV(svm.SVC(max_iter=10000, decision_function_shape='ovo'), parameters, n_jobs=-1,
                                          cv=3)
         model.fit(train_data[:n_train], train_labels[:n_train])
 
-
-        params = {'model': model, 'n_labels': np.unique(train_labels).shape[0], 'scaler': scaler}
+        params = {'model': model, 'n_labels': np.unique(train_labels).shape[0], 'scaler': None}
 
         # Learn a similarity embedding
         if method == 'S-SVM-A-10d':
@@ -46,7 +42,7 @@ def unsupervised_approximation(method='pca'):
         proj = LinearSEF(train_data.shape[1], output_dimensionality=dims)
         proj.cuda()
         loss = proj.fit(data=train_data[:n_train, :], target_data=train_data[:n_train, :],
-                        target_labels=train_labels[:n_train], target='svm', target_params=params, epochs=100,
+                        target_labels=train_labels[:n_train], target='svm', target_params=params, epochs=50,
                         learning_rate=0.001, batch_size=128, verbose=True, regularizer_weight=0.001)
 
         acc = evaluate_ncc(proj.transform(train_data[:n_train, :]), train_labels[:n_train],

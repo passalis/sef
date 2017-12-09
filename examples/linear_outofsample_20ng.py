@@ -6,13 +6,13 @@ import sklearn
 from sklearn.linear_model import LinearRegression
 from sklearn.manifold import Isomap
 from classification import evaluate_svm
-from mnist import load_mnist
+from newsgroups import load_20ng_dataset_bow
 from sef_dr.linear import LinearSEF
 
 
 def outofsample_extensions(method='linear-regression'):
     # Load the data and init seeds
-    train_data, train_labels, test_data, test_labels = load_mnist()
+    train_data, train_labels, test_data, test_labels = load_20ng_dataset_bow()
     np.random.seed(1)
     sklearn.utils.check_random_state(1)
     n_train_samples = 5000

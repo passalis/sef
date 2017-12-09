@@ -5,12 +5,13 @@ import numpy as np
 import sklearn
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from classification import evaluate_svm
-from mnist import load_mnist
+from newsgroups import load_20ng_dataset_bow
 from sef_dr.linear import LinearSEF
 
 def supervised_reduction(method=None):
     # Load data and init seeds
-    train_data, train_labels, test_data, test_labels = load_mnist()
+    train_data, train_labels, test_data, test_labels = load_20ng_dataset_bow()
+
     np.random.seed(1)
     sklearn.utils.check_random_state(1)
     n_train = 5000

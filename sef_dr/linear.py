@@ -11,7 +11,7 @@ from torch.autograd import Variable
 
 
 class LinearSEF(SEF_Base):
-    def __init__(self, input_dimensionality, output_dimensionality, scaler=None):
+    def __init__(self, input_dimensionality, output_dimensionality, scaler='default'):
         """
         Creats a Linear SEF object
         :param input_dimensionality: dimensionality of the input space
@@ -35,7 +35,7 @@ class LinearSEF(SEF_Base):
         :param data:
         :return:
         """
-
+        original_data = data
         # Initialize values
         if self.scaler is None:
             data = np.float32(data)
@@ -53,7 +53,7 @@ class LinearSEF(SEF_Base):
 
         # Estimate the sigma projection value (this usually makes the optimization "easier")
         # This can be pre-set to scale the projection into a specific range
-        sigma = mean_data_distance(self.transform(data))
+        sigma = mean_data_distance(self.transform(original_data))
         self.sigma_projection = np.float32(sigma)
 
     def _regularizer(self):

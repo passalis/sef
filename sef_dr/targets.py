@@ -3,6 +3,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import numpy as np
 from .similarity import fast_heat_similarity_matrix
+from sklearn.metrics.pairwise import pairwise_distances
 
 
 def sim_target_copy(target_data, target_labels, sigma, idx, target_params):
@@ -66,15 +67,16 @@ def sim_target_supervised(target_data, target_labels, sigma, idx, target_params)
     return np.float32(Gt), np.float32(mask)
 
 
-def sim_target_svm(target_data, target_labels, sigma, idx, target_params):
+
+def generate_svm_similarity_matrix(target_data, target_labels, n_labels, model, scaler):
     """
-    Sets as target to mimic the SVM-based similarity (SVM-based analysis)
-    :param target_data: target data
-    :param target_labels: target labels
-    :param sigma: (not used)
-    :param idx: indices of the data samples to be used for the calculation of the similarity matrix
-    :param target_params: expected to find the 'model', the used 'scaler' and the number of labels ('n_labels')
-    :return: the similarity matrix and the corresponding mask
+    Generates the target similarity matrix using SVM-based similarity
+
+    :param target_data: the data
+    :param target_labels: the labels of the data
+    :param model: the SVM model
+    :param scaler: the used scaler
+    :return:
     """
 
     def get_ovo_indices(n_labels):
@@ -98,10 +100,9 @@ def sim_target_svm(target_data, target_labels, sigma, idx, target_params):
 
         return dic
 
-    target_data = target_params['scaler'].transform(target_data[idx])
-    target_labels = target_labels[idx]
-    model = target_params['model']
-    n_labels = target_params['n_labels']
+    if scaler:
+        target_data = scaler.transform(target_data)
+
     N = target_data.shape[0]
 
     # Get the 1-1 mapping to the SVMs
@@ -110,16 +111,33 @@ def sim_target_svm(target_data, target_labels, sigma, idx, target_params):
     # Get the distances to the hyperplane
     prob = model.decision_function(target_data)
     G = np.zeros((N, N))
-    Gt_mask = np.ones((N, N))
+
     for i in range(N):
         for j in range(N):
             ovo = ovo_indices[(int(target_labels[i]), int(target_labels[j]))]
             G[i, j] = np.abs(prob[i, ovo] - prob[j, ovo])
 
     g = np.mean(G)
-    Gt = np.exp(-G / (g ** 2))
-    return np.float32(Gt), np.float32(Gt_mask)
+    Gt = np.exp(-G /g)
+    return Gt
 
+
+
+def sim_target_svm(target_data, target_labels, sigma, idx, target_params):
+    """
+    Sets as target to mimic the SVM-based similarity (SVM-based analysis)
+    :param target_data: target data
+    :param target_labels: target labels
+    :param sigma: (not used)
+    :param idx: indices of the data samples to be used for the calculation of the similarity matrix
+    :param target_params: expected to find the 'model', the used 'scaler' and the number of labels ('n_labels')
+    :return: the similarity matrix and the corresponding mask
+    """
+
+    Gt = generate_svm_similarity_matrix(target_data[idx], target_labels[idx], target_params['n_labels'],
+                                        target_params['model'], target_params['scaler'])
+    Gt_mask = np.ones((len(idx), (len(idx))))
+    return np.float32(Gt), np.float32(Gt_mask)
 
 def sim_target_fixed(target_data, target_labels, sigma, idx, target_params):
     """

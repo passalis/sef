@@ -23,7 +23,7 @@ def evaluate_svm(train_data, train_labels, test_data, test_labels, n_jobs=-1):
     train_data = scaler.fit_transform(train_data)
     test_data = scaler.transform(test_data)
 
-    parameters = {'kernel': ['linear'], 'C': [0.01, 0.1, 1, 10, 100, 1000, 10000]}
+    parameters = {'kernel': ['linear'], 'C': [0.0001, 0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000, 100000]}
     model = svm.SVC(max_iter=10000)
     clf = grid_search.GridSearchCV(model, parameters, n_jobs=n_jobs, cv=3)
     clf.fit(train_data, train_labels)

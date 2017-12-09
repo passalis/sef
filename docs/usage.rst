@@ -49,7 +49,7 @@ The experimental results demonstrate the ability of the proposed method to effic
 Method                          Accuracy
 =============================   ==========
 PCA 10-d                        82.88%
-**Linear SEF mimics PCA-20d**   **84.75%**
+**Linear SEF mimics PCA-20d**   **84.87%**
 =============================   ==========
 
 
@@ -69,8 +69,8 @@ The SEF-based method leads to superior results:
 Method            Dimensionality   Accuracy
 ==============    ==============   ==========
 LDA               9d	           85.66%
-Linear SEF        9d	           88.25%
-**Linear SEF**    **18d**          **90.23%**
+Linear SEF        9d	           88.89%
+**Linear SEF**    **18d**          **89.48%**
 ==============    ==============   ==========
 
 
@@ -91,16 +91,16 @@ The results are shown in the following tables:
 Method                Dimensionality   Accuracy
 ==================    ==============   ============
 Linear Regression     10d              85.25%
-Linear SEF            10d              86.13%
-**Linear SEF**        **20d**            **89.07%**
+Linear SEF            10d              85.76%
+**Linear SEF**        **20d**            **89.48%**
 ==================    ==============   ============
 
 ==================    ==============   ==========
 Method                Dimensionality   Accuracy
 ==================    ==============   ==========
 Kernel Regression     10d              89.48%
-Kernel SEF            10d              87.05%
-**Kernel SEF**        **20d**          **90.35%**
+Kernel SEF            10d              88.60%
+**Kernel SEF**        **20d**          **90.88%**
 ==================    ==============   ==========
 
 
@@ -131,8 +131,8 @@ The results are shown in the following table:
 Method                   Dimensionality   Accuracy
 ======================   ==============   ==========
 NCC - Original           784d             80.84%
-NCC - Linear SEF         10d              85.76%
-**NCC - Linear SEF**     **20d**          **86.46%**
+NCC - Linear SEF         10d              86.50%
+**NCC - Linear SEF**     **20d**          **86.67%**
 ======================   ==============   ==========
 
 
