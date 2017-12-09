@@ -13,7 +13,7 @@ def test_kernel_sef():
     train_labels = np.random.randint(0, 2, 100)
 
     proj = KernelSEF(train_data, 50, output_dimensionality=12, kernel_type='rbf')
-
+    proj._initialize(train_data)
     proj_data = proj.transform(train_data, batch_size=8)
     assert proj_data.shape[0] == 100
     assert proj_data.shape[1] == 12
