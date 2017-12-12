@@ -4,7 +4,6 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import numpy as np
 import sklearn
 from sklearn import svm, grid_search
-from sklearn.preprocessing import StandardScaler
 from classification import evaluate_svm, evaluate_ncc
 from datasets import load_mnist
 from sef_dr.linear import LinearSEF
@@ -16,10 +15,6 @@ def svm_approximation(method=None):
     np.random.seed(1)
     sklearn.utils.check_random_state(1)
     n_train = 5000
-
-    scaler = StandardScaler()
-    train_data = scaler.fit_transform(train_data)
-    test_data = scaler.transform(test_data)
 
     if method == 'svm':
         acc = evaluate_svm(train_data[:n_train, :], train_labels[:n_train], test_data, test_labels)
