@@ -6,7 +6,7 @@ import sklearn
 from sklearn.kernel_ridge import KernelRidge
 from sklearn.manifold import Isomap
 from classification import evaluate_svm
-from mnist import load_mnist
+from datasets import load_mnist
 from sef_dr.kernel import KernelSEF
 from sef_dr.sef_base import mean_data_distance
 
@@ -39,7 +39,7 @@ def outofsample_extensions(method='kernel-regression'):
         proj = KernelSEF(train_data[:n_train_samples], train_data.shape[1], output_dimensionality=dims)
         proj.cuda()
         loss = proj.fit(data=train_data[:n_train_samples, :], target_data=train_data_isomap, target='copy',
-                        epochs=300, batch_size=128, verbose=True, learning_rate=0.00001,  regularizer_weight=0.001)
+                        epochs=100, batch_size=128, verbose=True, learning_rate=0.00001, regularizer_weight=0.001)
         acc = evaluate_svm(proj.transform(train_data[:n_train_samples, :]), train_labels[:n_train_samples],
                            proj.transform(test_data), test_labels)
 
@@ -55,4 +55,3 @@ if __name__ == '__main__':
 
     print("Evaluating kernel SEF (20d) for providing out-of-sample extensions...")
     outofsample_extensions('cK-ISOMAP-20d')
-

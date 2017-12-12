@@ -118,7 +118,7 @@ def generate_svm_similarity_matrix(target_data, target_labels, n_labels, model, 
             G[i, j] = np.abs(prob[i, ovo] - prob[j, ovo])
 
     g = np.mean(G)
-    Gt = np.exp(-G /g)
+    Gt = np.exp(-G / g)
     return Gt
 
 
@@ -136,6 +136,23 @@ def sim_target_svm(target_data, target_labels, sigma, idx, target_params):
 
     Gt = generate_svm_similarity_matrix(target_data[idx], target_labels[idx], target_params['n_labels'],
                                         target_params['model'], target_params['scaler'])
+    Gt_mask = np.ones((len(idx), (len(idx))))
+    return np.float32(Gt), np.float32(Gt_mask)
+
+def sim_target_svm_precomputed(target_data, target_labels, sigma, idx, target_params):
+    """
+    Sets as target to mimic the SVM-based similarity (SVM-based analysis)
+    This function uses a precomputed similarity matrix to avoid repeated SVM calls
+    :param target_data: (not used)
+    :param target_labels: (not used)
+    :param sigma: (not used)
+    :param idx: indices of the data samples to be used for the calculation of the similarity matrix
+    :param target_params: expected to find the 'Gt' (precomputed similarity matrix using the generate_svm_similarity_matrix
+    :return: the similarity matrix and the corresponding mask
+    """
+
+    Gt = np.float32(target_params['Gt'])
+    Gt = Gt[:, idx][idx]
     Gt_mask = np.ones((len(idx), (len(idx))))
     return np.float32(Gt), np.float32(Gt_mask)
 

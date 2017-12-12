@@ -6,7 +6,7 @@ import sklearn
 from sklearn.linear_model import LinearRegression
 from sklearn.manifold import Isomap
 from classification import evaluate_svm
-from mnist import load_mnist
+from datasets import load_mnist
 from sef_dr.linear import LinearSEF
 
 
