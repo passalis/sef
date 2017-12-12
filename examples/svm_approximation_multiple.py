@@ -35,10 +35,6 @@ def svm_approximation(method=None, dataset=None):
         model.fit(train_data, train_labels)
 
         # params = {'model': model, 'n_labels': np.unique(train_labels).shape[0], 'scaler': None}
-
-        acc = evaluate_ncc(model.decision_function(train_data), train_labels, model.decision_function(test_data), test_labels)
-        print(acc)
-
         Gt = generate_svm_similarity_matrix(train_data, train_labels,
                                             len(np.unique(train_labels)), model, None)
         params = {'Gt': Gt}
