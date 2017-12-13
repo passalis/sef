@@ -149,7 +149,7 @@ NCC - Linear SEF         10d              86.50%
 
 More examples
 =============
-More examples using six different datasets (15-Scene, Corel, MNIST, Yale, KTH, 20NG) are provided on `Github <https://github.com/passalis/sef/blob/master/examples>`_. To run these examples you have to download the extracted descriptors from `datasets <https://www.dropbox.com/sh/9qlt6b54v5jxial/AABccAu09ngHWPoj7kc9HOaXa?dl=0>`_ into the *data* folder. Note that slight differences from the original research `paper <https://arxiv.org/abs/1706.05692>`_ are due to some minor changes (batch-based optimization, faster estimation of the scaling factor, port to PyTorch).
+More examples using six different datasets (15-Scene, Corel, MNIST, Yale, KTH, 20NG) are provided on `Github <https://github.com/passalis/sef/blob/master/examples>`_. To run these examples you have to download the extracted descriptors from `datasets <https://www.dropbox.com/sh/9qlt6b54v5jxial/AABccAu09ngHWPoj7kc9HOaXa?dl=0>`_ into the *data* folder. Note that slight differences from the original research `paper <https://arxiv.org/abs/1706.05692>`_ are due to some changes (batch-based optimization, faster estimation of the scaling factor, port to PyTorch).
 
 PySEF tutorials
 ===============
