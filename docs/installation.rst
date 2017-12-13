@@ -6,7 +6,7 @@ Installation
 
 Recommended (pip-based) installation
 ====================================
-A working installation of PyTorch is required before installing PySEF. To install PyTorch, please follow the instructions given in the `PyTorch site <http://http://pytorch.org/>`_.
+A working installation of PyTorch is required before installing PySEF. To install PyTorch, please follow the instructions given in the `PyTorch site <http://pytorch.org/>`_.
 
 The recommended way to install PySEF is simply to use the *pip* package manager::
 
