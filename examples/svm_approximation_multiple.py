@@ -8,7 +8,7 @@ from classification import evaluate_svm, evaluate_ncc
 from datasets import dataset_loader
 from sef_dr.targets import generate_svm_similarity_matrix, sim_target_svm_precomputed
 from sef_dr.linear import LinearSEF
-from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.preprocessing import LabelEncoder
 
 
 def svm_approximation(method=None, dataset=None):
@@ -48,7 +48,7 @@ def svm_approximation(method=None, dataset=None):
         proj = LinearSEF(train_data.shape[1], output_dimensionality=dims)
         proj.cuda()
         loss = proj.fit(data=train_data, target_data=train_data, target_labels=train_labels,
-                        target=sim_target_svm_precomputed, target_params=params, epochs=50, learning_rate=0.001,
+                        target=sim_target_svm_precomputed, target_params=params, epochs=100, learning_rate=0.001,
                         batch_size=256, verbose=True, regularizer_weight=0.001)
 
         acc = evaluate_ncc(proj.transform(train_data), train_labels,
