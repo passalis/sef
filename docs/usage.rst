@@ -124,8 +124,19 @@ Finally, in `svm_approximation.py <https://github.com/passalis/sef/blob/master/e
     proj.cuda()
     loss = proj.fit(data=train_data[:n_train, :], target_data=train_data[:n_train, :], target_labels=train_labels[:n_train], target='svm', target_params=params, epochs=50, learning_rate=0.001, batch_size=128, verbose=True, regularizer_weight=0.001)
 
-The results are shown in the following table:
+This code repeatedly calls the SVM to calculate the similarity matrix for the samples in each batch. If the whole similarity matrix can fit into the memory, we can speed up this process by using a precomputed similarity matrix as follows::
 
+    from sef_dr.targets import generate_svm_similarity_matrix, sim_target_svm_precomputed
+    
+    # Precompute the similarity matrix
+    Gt = generate_svm_similarity_matrix(train_data, train_labels, len(np.unique(train_labels)), model, scaler)
+    params = {'Gt': Gt}
+    
+    proj = LinearSEF(train_data.shape[1], output_dimensionality=dims)
+    proj.cuda()
+    loss = proj.fit(data=train_data, target_data=train_data, target_labels=train_labels, target=sim_target_svm_precomputed, target_params=params, epochs=50, learning_rate=0.001, batch_size=128, verbose=True, regularizer_weight=0.001)
+
+The results are shown in the following table:
 
 ======================   ==============   ==========
 Method                   Dimensionality   Accuracy
@@ -135,6 +146,10 @@ NCC - Linear SEF         10d              86.50%
 **NCC - Linear SEF**     **20d**          **86.67%**
 ======================   ==============   ==========
 
+
+More examples
+=============
+More examples using six different datasets (15-Scene, Corel, MNIST, Yale, KTH, 20NG) are provided on `Github <https://github.com/passalis/sef/blob/master/examples>`_. To run these examples you have to download the extracted descriptors from `datasets <https://www.dropbox.com/sh/9qlt6b54v5jxial/AABccAu09ngHWPoj7kc9HOaXa?dl=0>`_ into the `data' folder. Note that slight differences from the original research `paper <https://arxiv.org/abs/1706.05692>`_ are due to some minor changes (batch-based optimization, faster estimation of the scaling factor, port to PyTorch).
 
 PySEF tutorials
 ===============
