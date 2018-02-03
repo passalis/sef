@@ -4,9 +4,9 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import numpy as np
 import sklearn
 from sklearn.decomposition import PCA
-from classification import evaluate_svm
+from sef_dr.utils.classification import evaluate_svm
 from sef_dr.linear import LinearSEF
-from datasets import dataset_loader
+from sef_dr.utils.datasets import dataset_loader
 
 
 def unsupervised_approximation(method=None, dataset=None):

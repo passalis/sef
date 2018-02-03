@@ -4,10 +4,10 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import numpy as np
 import sklearn
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-from classification import evaluate_svm
+from sef_dr.utils.classification import evaluate_svm
 from sef_dr.linear import LinearSEF
 from sklearn.cross_validation import StratifiedShuffleSplit
-from datasets import dataset_loader
+from sef_dr.utils.datasets import dataset_loader
 from sklearn.preprocessing import StandardScaler
 
 
