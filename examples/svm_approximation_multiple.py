@@ -15,7 +15,8 @@ def svm_approximation(method=None, dataset=None):
     np.random.seed(1)
     sklearn.utils.check_random_state(1)
 
-    train_data, train_labels, test_data, test_labels = dataset_loader(dataset, seed=1)
+    dataset_path = 'data'
+    train_data, train_labels, test_data, test_labels = dataset_loader(dataset_path, dataset, seed=1)
 
     lab = LabelEncoder()
     train_labels = lab.fit_transform(train_labels)

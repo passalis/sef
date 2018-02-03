@@ -29,12 +29,17 @@ class LinearSEF(SEF_Base):
         self.W = Variable(torch.from_numpy(W), requires_grad=True)
         self.trainable_params = [self.W]
 
-    def _initialize(self, data):
+    def _initialize(self, data, n_samples=5000):
         """
         Initializes the linear SEF model
-        :param data:
+        :param data: Data to be used for the initialization
+        :param n_samples: Number of samples to be used for initializing the model
         :return:
         """
+        # Subsample the data
+        idx = np.random.permutation(data.shape[0])[:n_samples]
+        data = data[idx]
+
         original_data = data
         # Initialize values
         if self.scaler is None:

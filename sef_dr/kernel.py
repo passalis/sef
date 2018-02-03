@@ -49,7 +49,7 @@ class KernelSEF(SEF_Base):
             sigma_kernel = np.float32(mean_data_distance(data))
             self.sigma_kernel = sigma_kernel
         else:
-            self.sigma_kernel = 1
+            self.sigma_kernel = sigma
 
         # Use kPCA for initialization
         kpca = KernelPCA(kernel=self.kernel_type, n_components=self.output_dimensionality,
@@ -66,12 +66,17 @@ class KernelSEF(SEF_Base):
         self.trainable_params = [self.A]
         self.non_trainable_params = [self.X_kernel]
 
-    def _initialize(self, data):
+    def _initialize(self, data, n_samples=5000):
         """
         Initializes the kernel SEF model
         :param data: Data to be used for the initialization
+        :param n_samples: Number of samples to be used for initializing the model
         :return:
         """
+        # Subsample the data
+        idx = np.random.permutation(data.shape[0])[:n_samples]
+        data = data[idx]
+
         # Estimate the sigma projection value (this usually makes the optimization "easier")
         self.sigma_projection = np.float32(mean_data_distance(self.transform(data)))
 

@@ -4,8 +4,8 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import numpy as np
 import sklearn
 from sklearn import svm, grid_search
-from classification import evaluate_svm, evaluate_ncc
-from datasets import load_mnist
+from sef_dr.utils.classification import evaluate_svm, evaluate_ncc
+from sef_dr.utils.datasets import load_mnist
 from sef_dr.linear import LinearSEF
 from sef_dr.targets import generate_svm_similarity_matrix, sim_target_svm_precomputed
 
@@ -39,7 +39,7 @@ def svm_approximation(method=None):
 
         # Precompute the similarity matrix
         Gt = generate_svm_similarity_matrix(train_data[:n_train], train_labels[:n_train],
-                                       len(np.unique(train_labels)), model, scaler)
+                                       len(np.unique(train_labels)), model, None)
         params = {'Gt': Gt}
 
         # otherwise, we can simply set target='svm' and use the following target
