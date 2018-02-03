@@ -78,7 +78,7 @@ def dataset_loader(dataset_path=None, dataset='mnist', seed=1):
         test_labels = labels[test_idx]
 
     elif dataset == 'kth':
-        train_data, train_labels, test_data, test_labels = load_kth(datasets_path)
+        train_data, train_labels, test_data, test_labels = load_kth(dataset_path)
         idx = np.random.permutation(train_data.shape[0])
         train_data, train_labels = train_data[idx], train_labels[idx]
         idx = np.random.permutation(test_data.shape[0])
