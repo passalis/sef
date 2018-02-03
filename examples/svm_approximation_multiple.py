@@ -4,8 +4,8 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import numpy as np
 import sklearn
 from sklearn import svm, grid_search
-from sef_dr.utils.classification import evaluate_svm, evaluate_ncc
-from sef_dr.utils.datasets import dataset_loader
+from sef_dr.classification import evaluate_svm, evaluate_ncc
+from sef_dr.datasets import dataset_loader
 from sef_dr.targets import generate_svm_similarity_matrix, sim_target_svm_precomputed
 from sef_dr.linear import LinearSEF
 from sklearn.preprocessing import LabelEncoder

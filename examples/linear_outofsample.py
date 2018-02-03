@@ -5,8 +5,8 @@ import numpy as np
 import sklearn
 from sklearn.linear_model import LinearRegression
 from sklearn.manifold import Isomap
-from sef_dr.utils.classification import evaluate_svm
-from sef_dr.utils.datasets import load_mnist
+from sef_dr.classification import evaluate_svm
+from sef_dr.datasets import load_mnist
 from sef_dr.linear import LinearSEF
 
 

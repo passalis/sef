@@ -5,8 +5,8 @@ import numpy as np
 import sklearn
 from sklearn.kernel_ridge import KernelRidge
 from sklearn.manifold import Isomap
-from sef_dr.utils.classification import evaluate_svm
-from sef_dr.utils.datasets import dataset_loader
+from sef_dr.classification import evaluate_svm
+from sef_dr.datasets import dataset_loader
 from sef_dr.kernel import KernelSEF
 from sef_dr.sef_base import mean_data_distance
 

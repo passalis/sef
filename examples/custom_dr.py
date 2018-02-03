@@ -2,7 +2,7 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import numpy as np
-from sef_dr.utils.datasets import dataset_loader
+from sef_dr.datasets import dataset_loader
 import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches

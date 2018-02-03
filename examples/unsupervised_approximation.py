@@ -4,8 +4,8 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import numpy as np
 import sklearn
 from sklearn.decomposition import PCA
-from sef_dr.utils.classification import evaluate_svm
-from sef_dr.utils.datasets import load_mnist
+from sef_dr.classification import evaluate_svm
+from sef_dr.datasets import load_mnist
 from sef_dr.linear import LinearSEF
 
 
