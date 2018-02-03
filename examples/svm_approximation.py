@@ -3,7 +3,9 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import numpy as np
 import sklearn
-from sklearn import svm, grid_search
+from sklearn import svm
+from sklearn.model_selection import GridSearchCV
+
 from sef_dr.classification import evaluate_svm, evaluate_ncc
 from sef_dr.datasets import load_mnist
 from sef_dr.linear import LinearSEF
@@ -25,7 +27,7 @@ def svm_approximation(method=None):
 
         # Learn an SVM
         parameters = {'kernel': ['linear'], 'C': [0.0001, 0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000, 100000]}
-        model = grid_search.GridSearchCV(svm.SVC(max_iter=10000, decision_function_shape='ovo'), parameters, n_jobs=-1,
+        model = GridSearchCV(svm.SVC(max_iter=10000, decision_function_shape='ovo'), parameters, n_jobs=-1,
                                          cv=3)
         model.fit(train_data[:n_train], train_labels[:n_train])
 

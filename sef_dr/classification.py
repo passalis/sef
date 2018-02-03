@@ -1,7 +1,8 @@
 # License: MIT License https://github.com/passalis/sef/blob/master/LICENSE.txt
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from sklearn import svm, grid_search
+from sklearn import svm
+from sklearn.model_selection import GridSearchCV
 from sklearn.neighbors import NearestCentroid
 from sklearn.preprocessing import MinMaxScaler
 
@@ -25,7 +26,8 @@ def evaluate_svm(train_data, train_labels, test_data, test_labels, n_jobs=-1):
 
     parameters = {'kernel': ['linear'], 'C': [0.0001, 0.001, 0.01, 0.1, 1, 10, 100, 1000, 10000, 100000]}
     model = svm.SVC(max_iter=10000)
-    clf = grid_search.GridSearchCV(model, parameters, n_jobs=n_jobs, cv=3)
+
+    clf = GridSearchCV(model, parameters, n_jobs=n_jobs, cv=3)
     clf.fit(train_data, train_labels)
     lin_svm_test = clf.score(test_data, test_labels)
     return lin_svm_test
