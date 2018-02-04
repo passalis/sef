@@ -10,7 +10,7 @@ from sef_dr.linear import LinearSEF
 
 def supervised_reduction(method=None):
     # Load data and init seeds
-    train_data, train_labels, test_data, test_labels = load_mnist()
+    train_data, train_labels, test_data, test_labels = load_mnist(dataset_path='data')
     np.random.seed(1)
     sklearn.utils.check_random_state(1)
     n_train = 5000

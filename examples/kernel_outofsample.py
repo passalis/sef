@@ -13,7 +13,7 @@ from sef_dr.sef_base import mean_data_distance
 
 def outofsample_extensions(method='kernel-regression'):
     # Load the data and init seeds
-    train_data, train_labels, test_data, test_labels = load_mnist()
+    train_data, train_labels, test_data, test_labels = load_mnist(dataset_path='data')
     np.random.seed(1)
     sklearn.utils.check_random_state(1)
     n_train_samples = 5000

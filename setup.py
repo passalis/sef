@@ -14,14 +14,13 @@ setup(
         "scikit-learn >= 0.19.1",
 	    "numpy >= 1.13.3",
         "scipy >= 1.0.0",
-        "keras >= 2.1.0"
-
+        "torchvision >= 0.2.0"
     ],
     install_requires=[
         "scikit-learn >= 0.19.1",
         "numpy >= 1.13.3",
         "scipy >= 1.0.0",
-        "keras >= 2.1.0"
+        "torchvision >= 0.2.0"
 
     ],
 )

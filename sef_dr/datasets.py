@@ -1,10 +1,11 @@
-from keras.datasets import mnist
 from sklearn.datasets import fetch_20newsgroups
+import torchvision
 from sklearn.feature_extraction.text import TfidfVectorizer
 from os.path import join
 import numpy as np
 import pickle
 
+#TODO: Update mnist examples!!!
 
 def dataset_loader(dataset_path=None, dataset='mnist', seed=1):
     """
@@ -19,7 +20,7 @@ def dataset_loader(dataset_path=None, dataset='mnist', seed=1):
     n_train = 5000
 
     if dataset == 'mnist':
-        train_data, train_labels, test_data, test_labels = load_mnist()
+        train_data, train_labels, test_data, test_labels = load_mnist(dataset_path)
         train_data = train_data[:n_train, :]
         train_labels = train_labels[:n_train]
     elif dataset == '20ng':
@@ -90,18 +91,24 @@ def dataset_loader(dataset_path=None, dataset='mnist', seed=1):
     return train_data, train_labels, test_data, test_labels
 
 
-def load_mnist():
+def load_mnist(dataset_path):
     """
     Loads the MNIST dataset
     :return:
     """
 
-    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    # Get the train split
+    mnist = torchvision.datasets.MNIST(root=dataset_path, download=True, train=True)
+    x_train, y_train = mnist.train_data.numpy(), mnist.train_labels.numpy()
+
+    # Get the test split
+    mnist = torchvision.datasets.MNIST(root=dataset_path, download=True, train=False)
+    x_test, y_test = mnist.test_data.numpy(), mnist.test_labels.numpy()
+
     x_train = x_train.reshape((x_train.shape[0], -1)) / 255.0
     x_test = x_test.reshape((x_test.shape[0], -1)) / 255.0
 
     return np.float32(x_train), y_train, np.float32(x_test), y_test
-
 
 def load_20ng_dataset_bow():
     """
@@ -183,3 +190,4 @@ def load_yale_dataset(datasets_path):
     labels = np.asarray(np.squeeze(labels), dtype='int')
 
     return features, labels
+

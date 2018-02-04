@@ -33,7 +33,7 @@ if __name__ == '__main__':
     np.random.seed(1)
 
     # Load data and sample 3 classes
-    train_data, train_labels, test_data, test_labels = dataset_loader(dataset='mnist')
+    train_data, train_labels, test_data, test_labels = dataset_loader(dataset='mnist', dataset_path='data')
     idx = np.logical_or(train_labels == 0, train_labels == 1)
     idx = np.logical_or(idx, train_labels == 2)
     train_data, train_labels = train_data[idx], train_labels[idx]
