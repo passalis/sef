@@ -21,6 +21,7 @@ The vast majority of Dimensionality Reduction techniques rely on second-order st
     
    installation
    usage
+   examples
    extending
 
 

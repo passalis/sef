@@ -28,13 +28,4 @@ To install the latest version availabe at github, clone our repository and manua
     python setup.py install --user
 
 
-Running the examples/tutorials
-==============================
 
-*Keras* and *matplotlib* are also needed to run the examples and the tutorials provided in our github repository (keras provide an easy way to load the *MNIST* dataset and *matplotlib* to plot the loss function during the optimization). Therefore, before running the supplied examples/tutorials you have to install keras (along with an appropriate backend, e.g., the *Tensorflow* library) and matplotlib::
-
-    pip install keras
-    pip install tensorflow
-    pip install matplotlib
-    
-Note that these are only needed for the specific examples and they are not mandatory for using the *PySEF* library.

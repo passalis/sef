@@ -26,6 +26,25 @@ To move the model back to cpu, the *.cpu()* method should be called::
     proj.cpu()
 
 
+.. _data-loading:
+
+Data loading
+==========================
+
+To allow for easily evaluating and comparing different dimensionality reduction techniques we have included data loading capabilities in PySEF. Before running any of the following examples, please download the pre-extracted feature vectors from the following `drobpox folder <https://www.dropbox.com/sh/9qlt6b54v5jxial/AABccAu09ngHWPoj7kc9HOaXa?dl=0>`_. After downloading them into a folder, e.g., let's say that we download them into the */home/nick/my_data* folder, you can easily load any of the six supported datasets as follows::
+
+    from sef_dr.datasets import dataset_loader
+    train_data, train_labels, test_data, test_labels = dataset_loader(dataset='mnist', dataset_path='/home/nick/my_data')
+    train_data, train_labels, test_data, test_labels = dataset_loader(dataset='20ng', dataset_path='/home/nick/my_data')
+    train_data, train_labels, test_data, test_labels = dataset_loader(dataset='15scene', dataset_path='/home/nick/my_data')
+    train_data, train_labels, test_data, test_labels = dataset_loader(dataset='corel', dataset_path='/home/nick/my_data')
+    train_data, train_labels, test_data, test_labels = dataset_loader(dataset='yale', dataset_path='da/home/nick/my_datata')
+    train_data, train_labels, test_data, test_labels = dataset_loader(dataset='kth', dataset_path='da/home/nick/my_datata')
+
+The *MNIST dataset* and the *20NG dataset* will be automatically downloaded into the specified folder the first time that the *dataset_loader()* function will be called. Please refer to `this paper <http://ieeexplore.ieee.org/document/8004500/>`_ for a detailed description of the evaluation setup and feature extraction process.
+
+
+
 Recreating the geometry of a high dimensional space into a space with less dimensions
 =====================================================================================
 In `unsupervised_approximation.py <https://github.com/passalis/sef/blob/master/examples/unsupervised_approximation.py>`_ we demonstrate how to recreate the 50-d PCA using just 10 dimensions::
@@ -146,14 +165,5 @@ NCC - Linear SEF         10d              86.50%
 **NCC - Linear SEF**     **20d**          **86.67%**
 ======================   ==============   ==========
 
-
-More examples
-=============
-More examples using six different datasets (15-Scene, Corel, MNIST, Yale, KTH, 20NG) are provided on `Github <https://github.com/passalis/sef/blob/master/examples>`_. To run these examples you have to download the extracted descriptors from `datasets <https://www.dropbox.com/sh/9qlt6b54v5jxial/AABccAu09ngHWPoj7kc9HOaXa?dl=0>`_ into the *data* folder. Note that slight differences from the original research `paper <https://arxiv.org/abs/1706.05692>`_ are due to some changes (batch-based optimization, faster estimation of the scaling factor, port to PyTorch).
-
-PySEF tutorials
-===============
-
-The capabilities of PySEF are thoroughly demonstrated in two ipython tutorials that can be found in `tutorials <https://github.com/passalis/sef/blob/master/tutorials>`_.
 
 
