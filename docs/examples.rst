@@ -13,7 +13,7 @@ To run the examples you have to install PySEF (please also refer to :ref:`instal
 
      pip install pysef
 
-Before running any of the following examples, please download the pre-extracted feature vectors from the following `drobpox folder <https://www.dropbox.com/sh/9qlt6b54v5jxial/AABccAu09ngHWPoj7kc9HOaXa?dl=0>`_  into a folder named *data* and execute the script from the same root folder (or simply update the data path in the code). Refer to :ref:`Data loading <data-loading>` for more details.
+Before running any of the following examples, please download the pre-extracted feature vectors from the following `drobpox folder <https://www.dropbox.com/sh/9qlt6b54v5jxial/AABccAu09ngHWPoj7kc9HOaXa?dl=0>`_  into a folder named *data*. Then, run the downloaded example (see the following) from the same root folder that contains the *data* folder. Alternatively, you can simply update the data path in the code (please refer to :ref:`Data loading <data-loading>` for more details on data loading).
 
 Please also install *matplotlib*, which is also needed for some of the following examples/tutorials::
     
@@ -127,10 +127,10 @@ To run the tutorials you have to install the Jupyter Notebook (also refer to `In
 
     pip install jupyter
 
-Then, download the notebook tutorial you are interested in. Currently two tutorial are available: a) `Supervised dimensionality reduction <https://github.com/passalis/sef/blob/master/tutorials/Supervised%20DR.ipynb>`_, and b) `Defining new dimensionality reduction methods <https://github.com/passalis/sef/blob/master/tutorials/Defining%20new%20methods.ipynb>`_. Then, navigate to the folder that contains the notebook and start the Jupyter Notebook::
+Then, download the notebook tutorial you are interested in. Currently two tutorial are available: a) `Supervised dimensionality reduction <https://github.com/passalis/sef/blob/master/tutorials/Supervised%20DR.ipynb>`_, and b) `Defining new dimensionality reduction methods <https://github.com/passalis/sef/blob/master/tutorials/Defining%20new%20methods.ipynb>`_. After that, navigate to the folder that contains the notebook and start the Jupyter Notebook::
 
     jupyter notebook
 
-Finally, navigate to the default URL of Jupyter web app (`http://localhost:8888 <http://localhost:8888>`_) and select the notebook. Please make sure that you appropriately update the folder that contains the MNIST dataset when running the tutorials (refer to :ref:`Data loading <data-loading>` for more details, or just create an empty folder named *data* in the same root folder as the notebook and the dataset will be automatically downloaded).
+Finally, use your browser to navigate to the default URL of Jupyter web app (`http://localhost:8888 <http://localhost:8888>`_) and select the notebook. Please make sure that you appropriately update the folder that contains the MNIST dataset when running the tutorials (refer to :ref:`Data loading <data-loading>` for more details), or just create an empty folder named *data* in the same root folder as the notebook and the dataset will be automatically downloaded.
 
 
