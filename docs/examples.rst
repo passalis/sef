@@ -13,7 +13,7 @@ To run the examples you have to install PySEF (please also refer to :ref:`instal
 
      pip install pysef
 
-Before running any of the following examples, please download the pre-extracted feature vectors from the following `drobpox folder <https://www.dropbox.com/sh/9qlt6b54v5jxial/AABccAu09ngHWPoj7kc9HOaXa?dl=0>`_  into a folder named *data*. Then, run the downloaded example (see the following) from the same root folder that contains the *data* folder. Alternatively, you can simply update the data path in the code (please refer to :ref:`Data loading <data-loading>` for more details on data loading).
+Before running any of the following examples, please download the pre-extracted feature vectors from the following `drobpox folder <https://www.dropbox.com/sh/9qlt6b54v5jxial/AABccAu09ngHWPoj7kc9HOaXa?dl=0>`_  into a folder named *data*. Then, run the downloaded example (refer to the following sections) from the same root folder that contains the *data* folder. Alternatively, you can simply update the data path in the code (please refer to :ref:`Data loading <data-loading>` for more details on data loading).
 
 Please also install *matplotlib*, which is also needed for some of the following examples/tutorials::
     
