@@ -16,4 +16,28 @@ Be sure to check the [documentation](https://pysef.readthedocs.io) of the projec
 
 You can find more details about the Similarity Embedding Framework in our [paper](https://arxiv.org/abs/1706.05692).
 
+## Citation
 
+If you find PySEF/SEF useful please cite the relevant publications. The PySEF library is described in:
+<pre>
+@article{passalis2018pysef,
+  title={PySEF: A Python Library for Similarity-based Dimensionality Reduction},
+  author={Passalis, Nikolaos and Tefas, Anastasios},
+  journal={Knowledge-Based Systems},
+  volume={(to appear)},
+  pages={(to appear)},
+  year={2018},
+}
+</pre>
+while the method was derived and evaluated in detail in:
+
+<pre>
+@article{passalis2017sef,
+  title={Dimensionality Reduction Using Similarity-Induced Embeddings},
+  author={Passalis, Nikolaos and Tefas, Anastasios},
+  journal={IEEE Transactions on Neural Networks and Learning Systems}, 
+  volume={(to appear)},
+  pages={(to appear)},
+  year={2018},
+}
+</pre>
