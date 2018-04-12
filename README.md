@@ -24,8 +24,6 @@ If you find PySEF/SEF useful please cite the relevant publications. The PySEF li
   title={PySEF: A Python Library for Similarity-based Dimensionality Reduction},
   author={Passalis, Nikolaos and Tefas, Anastasios},
   journal={Knowledge-Based Systems},
-  volume={(to appear)},
-  pages={(to appear)},
   year={2018},
 }
 </pre>
@@ -36,8 +34,6 @@ while the method was derived and evaluated in detail in:
   title={Dimensionality Reduction Using Similarity-Induced Embeddings},
   author={Passalis, Nikolaos and Tefas, Anastasios},
   journal={IEEE Transactions on Neural Networks and Learning Systems}, 
-  volume={(to appear)},
-  pages={(to appear)},
-  year={2018},
+  year={2017},
 }
 </pre>
