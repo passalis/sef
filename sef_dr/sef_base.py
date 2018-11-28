@@ -208,7 +208,7 @@ class SEF_Base(object):
                 if self.use_gpu:
                     torch_loss = torch_loss.cpu()
 
-                cur_loss += torch_loss.data.numpy()[0]
+                cur_loss += torch_loss.data.item()
 
             if n_batches * batch_size < data.shape[0]:
                 optimizer.zero_grad()
@@ -235,7 +235,7 @@ class SEF_Base(object):
                 if self.use_gpu:
                     torch_loss = torch_loss.cpu()
 
-                cur_loss += torch_loss.data.numpy()[0]
+                cur_loss += torch_loss.data.item()
 
             epoch_end = time.time()
 
